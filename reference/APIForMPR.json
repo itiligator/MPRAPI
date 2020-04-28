@@ -475,7 +475,7 @@
     },
     "securitySchemes": {
       "Token ": {
-        "name": "Token",
+        "name": "Token ",
         "type": "apiKey",
         "in": "header",
         "description": ""
