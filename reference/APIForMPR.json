@@ -25,7 +25,7 @@
       "description": "Запросы для интеграции с 1С"
     },
     {
-      "name": "Клиенты",
+      "name": "Фронтенд",
       "description": "Запросы для пользовательских приложений"
     }
   ],
@@ -35,7 +35,7 @@
       "description": "точка запроса токена аутенфикации",
       "post": {
         "tags": [
-          "Клиенты"
+          "Фронтенд"
         ],
         "summary": "Запрос токена аутентификации",
         "requestBody": {
@@ -69,7 +69,7 @@
         "operationId": "retrieve-token"
       }
     },
-    "/clients": {
+    "/client/all": {
       "post": {
         "summary": "Обновление перечня клиентов",
         "tags": [
@@ -96,11 +96,11 @@
         }
       },
       "get": {
-        "summary": "Получение перечня клиентов",
+        "summary": "Получение перечня клиентов и магазинов",
         "tags": [
-          "Клиенты"
+          "Фронтенд"
         ],
-        "description": "Получение перечня клиентов, для которых в authorizedManagersID присутствует ID запрашивающего менеджера (т.е. перечня клиентов запрашивающего менеджера)",
+        "description": "Получение перечня действующих клиентов и магазинов, для которых в authorizedManagersID присутствует ID запрашивающего менеджера (т.е. перечня клиентов запрашивающего менеджера)",
         "responses": {
           "200": {
             "description": "OK",
@@ -117,13 +117,14 @@
           }
         },
         "operationId": "get-clients"
-      }
+      },
+      "parameters": []
     },
-    "/products": {
+    "/product/all": {
       "get": {
         "summary": "Получение перечня товаров",
         "tags": [
-          "Клиенты"
+          "Фронтенд"
         ],
         "responses": {
           "200": {
@@ -167,14 +168,15 @@
         "tags": [
           "1С"
         ]
-      }
+      },
+      "parameters": []
     },
-    "/price": {
+    "/price/all": {
       "post": {
         "summary": "Обновление перечня цен",
         "tags": [
           "1С",
-          "Клиенты"
+          "Фронтенд"
         ],
         "responses": {
           "200": {
@@ -200,7 +202,7 @@
         "summary": "Запрос перечня цен",
         "tags": [
           "1С",
-          "Клиенты"
+          "Фронтенд"
         ],
         "responses": {
           "200": {
@@ -219,11 +221,12 @@
         },
         "operationId": "get-price",
         "description": "Запрос перечня цен на товары. Вовзращает массив объектов цен"
-      }
+      },
+      "parameters": []
     },
-    "/finishedvisits": {
+    "/visit/finished": {
       "get": {
-        "summary": "Получение данных по завершенным визитам",
+        "summary": "Получение данных по всем завершенным визитам",
         "tags": [
           "1С"
         ],
@@ -243,10 +246,89 @@
           }
         },
         "operationId": "get-visits",
-        "description": "Вовращает массив объектов описания результатов визита",
+        "description": "Вовращает массив объектов описания результатов всех завершенных, но не запрошенных ранее визитов",
         "parameters": []
       },
       "parameters": []
+    },
+    "/visit": {
+      "get": {
+        "summary": "Получение результата визита",
+        "tags": [
+          "Фронтенд",
+          "1С"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VisitResults"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-visit",
+        "description": "Возвращает результат запрошенного визита",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "id",
+            "description": "ID визита"
+          }
+        ]
+      },
+      "post": {
+        "summary": "Запись результатов нового визита",
+        "operationId": "post-visit",
+        "responses": {
+          "201": {
+            "description": "Created"
+          }
+        },
+        "description": "Точка для записи результатов новых визитов",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VisitResults"
+              }
+            }
+          },
+          "description": "Объект описания результатов визита"
+        },
+        "tags": [
+          "Фронтенд"
+        ]
+      },
+      "put": {
+        "summary": "Обновление статуса визита",
+        "operationId": "put-visit",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Точка для обновления статуса оформления ПКО и отгрузки по товарам заказа",
+        "tags": [
+          "1С"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VisitStatus"
+              }
+            }
+          },
+          "description": "Данные о состоянии оформления ПКО и отгрузки товаров"
+        }
+      }
     }
   },
   "components": {
@@ -409,7 +491,7 @@
             "type": "string",
             "description": "Тип цены"
           },
-          "value": {
+          "amount": {
             "type": "string",
             "description": "Величина в рублях"
           },
@@ -420,29 +502,39 @@
         "required": [
           "productItem",
           "priceType",
-          "value",
+          "amount",
           "dataBase"
         ]
       },
-      "ProductOrder": {
+      "OrderedProducts": {
         "title": "Заказанный товар",
         "type": "object",
-        "description": "Объект описания заказанного товара",
+        "description": "Объект описания заказанного и отгруженного товара",
         "properties": {
           "productItem": {
             "type": "string",
             "description": "Артикул товара"
           },
-          "amount": {
+          "orderedQuantity": {
             "type": "integer",
-            "description": "Количество"
+            "description": "Заказанное количество"
+          },
+          "deliveredQuantity": {
+            "description": "Отгруженное количество",
+            "type": "integer"
           }
-        }
+        },
+        "required": [
+          "productItem"
+        ]
       },
       "VisitResults": {
         "title": "Результат визита",
         "type": "object",
         "description": "Данные по результату визита",
+        "x-examples": {
+          "example-1": {}
+        },
         "properties": {
           "visitID": {
             "type": "string",
@@ -467,10 +559,40 @@
           "orders": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/ProductOrder"
+              "$ref": "#/components/schemas/OrderedProducts"
             }
           }
-        }
+        },
+        "required": [
+          "visitID",
+          "date",
+          "dataBase",
+          "clientID",
+          "payment",
+          "orders"
+        ]
+      },
+      "VisitStatus": {
+        "title": "Данные по состоянию визита",
+        "type": "object",
+        "description": "Объект с описанием состояния ПКО и отгрузки для визита",
+        "properties": {
+          "visitID": {
+            "type": "string"
+          },
+          "cashRecieptIssued": {
+            "type": "string"
+          },
+          "": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OrderedProducts"
+            }
+          }
+        },
+        "required": [
+          "visitID"
+        ]
       }
     },
     "securitySchemes": {
