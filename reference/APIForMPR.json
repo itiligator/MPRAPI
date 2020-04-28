@@ -4,7 +4,8 @@
     "title": "API приложения МПР",
     "description": "API приложения для менеджеров пивоварни Рогозец",
     "contact": {
-      "email": "a.e.itiligator@gmail.com"
+      "email": "a.e.itiligator@gmail.com",
+      "name": "Андрей"
     },
     "version": "1.0.0"
   },
@@ -70,7 +71,7 @@
     },
     "/clients": {
       "post": {
-        "summary": "Обновление списка клиентов",
+        "summary": "Обновление перечня клиентов",
         "tags": [
           "1С"
         ],
@@ -80,7 +81,7 @@
           }
         },
         "operationId": "post-clients",
-        "description": "Обновление (на данный момент замена целиком) списка клиентов от 1С",
+        "description": "Обновление (на данный момент замена целиком, за исключением магазинов) перечня клиентов от 1С. Ожидает массив объектов описания клиентов",
         "requestBody": {
           "content": {
             "application/json": {
@@ -95,11 +96,11 @@
         }
       },
       "get": {
-        "summary": "Получение списка клиентов",
+        "summary": "Получение перечня клиентов",
         "tags": [
           "Клиенты"
         ],
-        "description": "Получение списка клиентов, для которых в authorizedManagersID присутствует ID запрашивающего менеджера (т.е. списка клиентов запрашивающего менеджера)",
+        "description": "Получение перечня клиентов, для которых в authorizedManagersID присутствует ID запрашивающего менеджера (т.е. перечня клиентов запрашивающего менеджера)",
         "responses": {
           "200": {
             "description": "OK",
@@ -120,7 +121,7 @@
     },
     "/products": {
       "get": {
-        "summary": "Получение списока товаров",
+        "summary": "Получение перечня товаров",
         "tags": [
           "Клиенты"
         ],
@@ -140,17 +141,17 @@
           }
         },
         "operationId": "get-products",
-        "description": "Получение списка товаров пивоварни"
+        "description": "Возвращает массив объектов товаров"
       },
       "post": {
-        "summary": "Обновление списка товаров",
+        "summary": "Обновление перечня товаров",
         "operationId": "post-products",
         "responses": {
           "200": {
             "description": "OK"
           }
         },
-        "description": "Обновление (на данный момент замена целиком) списка товаров от 1С",
+        "description": "Обновление (на данный момент замена целиком) перечня товаров от 1С. Ожидает массив объектов описания товаров",
         "requestBody": {
           "content": {
             "application/json": {
@@ -167,12 +168,60 @@
           "1С"
         ]
       }
+    },
+    "/price": {
+      "post": {
+        "summary": "Обновление перечня цен",
+        "tags": [
+          "1С",
+          "Клиенты"
+        ],
+        "responses": {},
+        "operationId": "post-price",
+        "description": "Обновление (на данный момент замена целиком всех) перкчня цен от 1С. Ожидает массив объектов описания цен ",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Price"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Запрос перечня цен",
+        "tags": [
+          "1С",
+          "Клиенты"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Price"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-price",
+        "description": "Запрос перечня цен на товары. Вовзращает массив объектов цен"
+      }
     }
   },
   "components": {
     "schemas": {
       "UserCredintials": {
-        "title": "Пара логин-пароль",
+        "title": "Пользовательские данные для аутентификации",
         "type": "object",
         "description": "Пара логин-пароль для получения токена аутентификации",
         "properties": {
@@ -219,7 +268,7 @@
           "delay": {
             "type": "integer",
             "default": 0,
-            "description": "Отсрочка платежей, дней",
+            "description": "Отсрочка по договору",
             "format": "int32",
             "example": 0,
             "minimum": 0,
@@ -280,7 +329,7 @@
       },
       "TokenResponse": {
         "type": "object",
-        "title": "Token response",
+        "title": "Токен аутентификации",
         "description": "Токен аутентификации",
         "properties": {
           "token": {
@@ -293,7 +342,7 @@
         ]
       },
       "Product": {
-        "title": "Product",
+        "title": "Товар",
         "type": "object",
         "description": "Товары пивоварни",
         "properties": {
@@ -314,6 +363,34 @@
           "item",
           "name",
           "description"
+        ]
+      },
+      "Price": {
+        "title": "Цена",
+        "type": "object",
+        "description": "Цена данного типа для товара ",
+        "properties": {
+          "productItem": {
+            "type": "string",
+            "description": "Артикул товара"
+          },
+          "priceType": {
+            "type": "string",
+            "description": "Тип цены"
+          },
+          "value": {
+            "type": "string",
+            "description": "Величина в рублях"
+          },
+          "dataBase": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "productItem",
+          "priceType",
+          "value",
+          "dataBase"
         ]
       }
     },
