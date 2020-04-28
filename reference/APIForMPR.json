@@ -1,0 +1,265 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API приложения МПР",
+    "description": "API приложения для менеджеров пивоварни Рогозец",
+    "contact": {
+      "email": "a.e.itiligator@gmail.com"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://46.174.253.173:8000/api",
+      "description": "Продакшн"
+    },
+    {
+      "url": "http://46.174.253.173:8000/sandbox",
+      "description": "Песочница"
+    }
+  ],
+  "tags": [
+    {
+      "name": "1С",
+      "description": "Запросы для интеграции с 1С"
+    },
+    {
+      "name": "Клиенты",
+      "description": "Запросы для пользовательских приложений"
+    }
+  ],
+  "paths": {
+    "/api-token-auth": {
+      "summary": "саммари",
+      "description": "точка запроса токена аутенфикации",
+      "post": {
+        "tags": [
+          "Клиенты"
+        ],
+        "summary": "Запрос токена аутентификации",
+        "requestBody": {
+          "description": "Пара логин-пароль",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserCredintials"
+              },
+              "examples": {}
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Токен аутентификации",
+            "headers": {},
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TokenResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Некорректные данные пользователя"
+          }
+        },
+        "description": "Получение токена аутентификации по паре логин-пароль",
+        "operationId": "retrieve-token"
+      }
+    },
+    "/clients": {
+      "post": {
+        "summary": "Обновление списка клиентов",
+        "tags": [
+          "1С"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "operationId": "post-clients",
+        "description": "Обновление (на данный момент замена целиком) списка клиентов от 1С",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Client"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Получение списка клиентов",
+        "tags": [
+          "Клиенты"
+        ],
+        "operationId": "get-clients",
+        "description": "Получение списка клиентов, для которых в authorizedManagersID присутствует ID запрашивающего менеджера (т.е. списка клиентов запрашивающего менеджера)",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Client"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {}
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "UserCredintials": {
+        "title": "Пара логин-пароль",
+        "type": "object",
+        "description": "Пара логин-пароль для получения токена аутентификации",
+        "properties": {
+          "username": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "username",
+          "password"
+        ]
+      },
+      "Client": {
+        "title": "Клиент",
+        "type": "object",
+        "description": "Данные клиента",
+        "x-examples": {},
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Уникальный идентификатор клиента"
+          },
+          "name": {
+            "type": "string",
+            "description": "Наименование клиента для отображения пользователю"
+          },
+          "inn": {
+            "type": "string",
+            "description": "ИНН"
+          },
+          "clientType": {
+            "type": "string",
+            "description": "Тип клиента (хорека, драфт, магазин etc)"
+          },
+          "priceType": {
+            "type": "string",
+            "description": "Тип цен для клиента"
+          },
+          "delay": {
+            "type": "integer",
+            "default": 0,
+            "description": "Отсрочка платежей, дней",
+            "format": "int32",
+            "example": 0,
+            "minimum": 0,
+            "maximum": 45
+          },
+          "limit": {
+            "type": "integer",
+            "default": 0,
+            "description": "Лимит",
+            "format": "int64",
+            "example": 0,
+            "minimum": 0,
+            "maximum": 100000
+          },
+          "authorizedManagersID": {
+            "type": "array",
+            "description": "Массив ID менеджеров, для которых доступен клиент",
+            "items": {
+              "type": "string"
+            }
+          },
+          "email": {
+            "type": "string",
+            "format": "email"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "manager": {
+            "type": "string"
+          },
+          "longitude": {
+            "type": "string"
+          },
+          "latitude": {
+            "type": "string"
+          },
+          "status": {
+            "type": "boolean",
+            "default": "1",
+            "description": "Действует/не действует"
+          },
+          "dataBase": {
+            "type": "boolean",
+            "default": "0"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "clientType",
+          "priceType",
+          "delay",
+          "authorizedManagersID",
+          "status",
+          "dataBase"
+        ]
+      },
+      "TokenResponse": {
+        "type": "object",
+        "title": "Token response",
+        "description": "Токен аутентификации",
+        "properties": {
+          "token": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "token"
+        ]
+      },
+      "Product": {
+        "title": "Product",
+        "type": "object",
+        "properties": {
+          "item": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "Token ": {
+        "name": "Token",
+        "type": "apiKey",
+        "in": "header",
+        "description": ""
+      }
+    }
+  }
+}
