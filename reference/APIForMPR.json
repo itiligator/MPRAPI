@@ -121,7 +121,9 @@
     "/products": {
       "get": {
         "summary": "Получение списока товаров",
-        "tags": [],
+        "tags": [
+          "Клиенты"
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -139,6 +141,31 @@
         },
         "operationId": "get-products",
         "description": "Получение списка товаров пивоварни"
+      },
+      "post": {
+        "summary": "Обновление списка товаров",
+        "operationId": "post-products",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Обновление (на данный момент замена целиком) списка товаров от 1С",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Product"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "1С"
+        ]
       }
     }
   },
@@ -150,10 +177,12 @@
         "description": "Пара логин-пароль для получения токена аутентификации",
         "properties": {
           "username": {
-            "type": "string"
+            "type": "string",
+            "description": "Имя пользователя"
           },
           "password": {
-            "type": "string"
+            "type": "string",
+            "description": "Пароль"
           }
         },
         "required": [
@@ -255,7 +284,8 @@
         "description": "Токен аутентификации",
         "properties": {
           "token": {
-            "type": "string"
+            "type": "string",
+            "description": "Токен аутентификации"
           }
         },
         "required": [
@@ -265,15 +295,26 @@
       "Product": {
         "title": "Product",
         "type": "object",
+        "description": "Товары пивоварни",
         "properties": {
           "item": {
-            "type": "string"
+            "type": "string",
+            "description": "Артикул товара"
           },
           "name": {
-            "type": "string"
+            "type": "string",
+            "description": "Короткое наименование товара"
+          },
+          "description": {
+            "type": "string",
+            "description": "Развернутое описание товара"
           }
         },
-        "description": "Товары пивоварни"
+        "required": [
+          "item",
+          "name",
+          "description"
+        ]
       }
     },
     "securitySchemes": {
