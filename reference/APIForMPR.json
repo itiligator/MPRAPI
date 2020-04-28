@@ -99,7 +99,6 @@
         "tags": [
           "Клиенты"
         ],
-        "operationId": "get-clients",
         "description": "Получение списка клиентов, для которых в authorizedManagersID присутствует ID запрашивающего менеджера (т.е. списка клиентов запрашивающего менеджера)",
         "responses": {
           "200": {
@@ -116,7 +115,30 @@
             }
           }
         },
-        "requestBody": {}
+        "operationId": "get-clients"
+      }
+    },
+    "/products": {
+      "get": {
+        "summary": "Получение списока товаров",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Product"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-products",
+        "description": "Получение списка товаров пивоварни"
       }
     }
   },
@@ -250,7 +272,8 @@
           "name": {
             "type": "string"
           }
-        }
+        },
+        "description": "Товары пивоварни"
       }
     },
     "securitySchemes": {
