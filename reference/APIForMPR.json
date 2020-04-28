@@ -245,7 +245,7 @@
         "description": "Данные клиента",
         "x-examples": {},
         "properties": {
-          "id": {
+          "clientID": {
             "type": "string",
             "description": "Уникальный идентификатор клиента"
           },
@@ -317,7 +317,7 @@
           }
         },
         "required": [
-          "id",
+          "clientID",
           "name",
           "clientType",
           "priceType",
@@ -392,6 +392,54 @@
           "value",
           "dataBase"
         ]
+      },
+      "ProductOrder": {
+        "title": "Заказанный товар",
+        "type": "object",
+        "description": "Объект описания заказанного товара",
+        "properties": {
+          "productItem": {
+            "type": "string",
+            "description": "Артикул товара"
+          },
+          "amount": {
+            "type": "integer",
+            "description": "Количество"
+          }
+        }
+      },
+      "VisitResults": {
+        "title": "Результат визита",
+        "type": "object",
+        "description": "Данные по результату визита",
+        "properties": {
+          "visitID": {
+            "type": "string",
+            "description": "Уникальный идентификатор визита"
+          },
+          "date": {
+            "type": "string",
+            "format": "date",
+            "description": "Дата совершения визита"
+          },
+          "dataBase": {
+            "type": "boolean"
+          },
+          "clientID": {
+            "type": "string",
+            "description": "Уникальный идентификатор клиента"
+          },
+          "payment": {
+            "type": "integer",
+            "description": "Принятая оплата"
+          },
+          "orders": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProductOrder"
+            }
+          }
+        }
       }
     },
     "securitySchemes": {
