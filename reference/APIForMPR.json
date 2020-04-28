@@ -176,7 +176,11 @@
           "1С",
           "Клиенты"
         ],
-        "responses": {},
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
         "operationId": "post-price",
         "description": "Обновление (на данный момент замена целиком всех) перкчня цен от 1С. Ожидает массив объектов описания цен ",
         "requestBody": {
@@ -226,18 +230,6 @@
         "responses": {
           "200": {
             "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/VisitResults"
-                  }
-                }
-              }
-            }
-          },
-          "": {
             "content": {
               "application/json": {
                 "schema": {
