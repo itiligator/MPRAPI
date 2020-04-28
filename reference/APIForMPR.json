@@ -216,6 +216,45 @@
         "operationId": "get-price",
         "description": "Запрос перечня цен на товары. Вовзращает массив объектов цен"
       }
+    },
+    "/finishedvisits": {
+      "get": {
+        "summary": "Получение данных по завершенным визитам",
+        "tags": [
+          "1С"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/VisitResults"
+                  }
+                }
+              }
+            }
+          },
+          "": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/VisitResults"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-visits",
+        "description": "Вовращает массив объектов описания результатов визита",
+        "parameters": []
+      },
+      "parameters": []
     }
   },
   "components": {
