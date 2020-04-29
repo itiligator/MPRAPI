@@ -453,7 +453,7 @@
             "description": "Not Found"
           }
         },
-        "description": "Точка для обновления статуса оформления ПКО и создания накладной",
+        "description": "Точка для обновления статуса оформления ПКО и создания накладной со стороны 1С, для обновления статуса и заказов со стороны фронтенда",
         "tags": [
           "1С"
         ],
@@ -461,7 +461,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/VisitStatus"
+                "$ref": "#/components/schemas/Visit"
               }
             }
           },
@@ -778,40 +778,10 @@
           "delivered": {
             "type": "boolean",
             "description": "Создана накладная на отгрузку"
-          }
-        },
-        "required": [
-          "visitID",
-          "date",
-          "dataBase",
-          "clientID",
-          "payment",
-          "orders"
-        ]
-      },
-      "VisitStatus": {
-        "title": "Данные по состоянию визита",
-        "type": "object",
-        "description": "Объект с описанием состояния ПКО и отгрузки для визита",
-        "properties": {
-          "visitID": {
-            "type": "string",
-            "description": "Уникальный идентификатор визита"
           },
-          "processed": {
-            "description": "Создан ПКО",
-            "type": "boolean"
-          },
-          "orders": {
-            "type": "array",
-            "description": "Массив данных о заказанныз товарах",
-            "items": {
-              "$ref": "#/components/schemas/OrderedProducts"
-            }
-          },
-          "delivered": {
-            "type": "boolean",
-            "description": "Создана накладная на отгрузку"
+          "status": {
+            "type": "integer",
+            "description": "Статус визита"
           }
         },
         "required": [
