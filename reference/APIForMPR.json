@@ -1066,9 +1066,7 @@
         "title": "Визит",
         "type": "object",
         "description": "Данные по визитам",
-        "x-examples": {
-          "example-1": {}
-        },
+        "x-examples": {},
         "x-tags": [
           "1С",
           "Офис",
