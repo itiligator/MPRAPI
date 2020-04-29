@@ -200,16 +200,7 @@
         },
         "operationId": "get-products",
         "description": "Возвращает массив объектов товаров",
-        "parameters": [
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "query",
-            "name": "item",
-            "description": "Артикул товара"
-          }
-        ]
+        "parameters": []
       },
       "post": {
         "summary": "Обновление перечня товаров",
@@ -236,6 +227,9 @@
           },
           "400": {
             "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
           }
         }
       },
@@ -292,6 +286,9 @@
           },
           "400": {
             "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
           }
         },
         "operationId": "get-price",
@@ -319,7 +316,7 @@
     },
     "/visits": {
       "get": {
-        "summary": "Получение данных визита",
+        "summary": "Получение данных визитов",
         "tags": [
           "Фронтенд",
           "1С",
@@ -349,14 +346,6 @@
         "operationId": "get-visit",
         "description": "Возвращает данные запрошенных визитов",
         "parameters": [
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "query",
-            "name": "id",
-            "description": "ID визита"
-          },
           {
             "schema": {
               "type": "boolean"
@@ -395,7 +384,7 @@
             },
             "in": "query",
             "name": "uploaded",
-            "description": "Был запрошен 1С"
+            "description": "Был выгружен в 1С"
           },
           {
             "schema": {
@@ -407,73 +396,9 @@
           }
         ]
       },
-      "put": {
-        "summary": "Обновление статуса визита",
-        "operationId": "put-visit",
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        },
-        "description": "Точка для обновления статуса оформления ПКО и создания накладной со стороны 1С, для обновления данных визита со стороны фронтенда",
-        "tags": [
-          "1С"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Visit"
-              }
-            }
-          },
-          "description": "Данные визита"
-        }
-      },
       "parameters": []
     },
     "/shops": {
-      "delete": {
-        "summary": "Удаление данных магазина",
-        "tags": [
-          "Офис"
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        },
-        "operationId": "delete-shop",
-        "parameters": [
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "query",
-            "name": "ID",
-            "description": "ID магазина"
-          }
-        ],
-        "description": "Запрос на удаление данных магазина"
-      },
       "put": {
         "summary": "Создание или обновления данных магазина",
         "tags": [
@@ -562,38 +487,6 @@
             }
           }
         },
-        "tags": [
-          "Офис"
-        ]
-      },
-      "delete": {
-        "summary": "Удаление вопроса",
-        "operationId": "delete-checklistsquestions",
-        "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        },
-        "parameters": [
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "query",
-            "name": "id",
-            "description": "ID вопроса"
-          }
-        ],
-        "description": "Запрос на удаление вопроса из чеклиста",
         "tags": [
           "Офис"
         ]
@@ -687,6 +580,221 @@
         "tags": [
           "Офис"
         ]
+      }
+    },
+    "/visit/{UUID}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": "UUID",
+          "in": "path",
+          "required": true,
+          "description": "UUID запрашиваемого визита"
+        }
+      ],
+      "put": {
+        "summary": "Запись данных визита",
+        "tags": [
+          "Фронтенд",
+          "1С"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "operationId": "put-visit-UUID",
+        "description": "Точка для обновления данных визита со стороны фронтенда и для обновления статуса оформления ПКО и создания накладной со стороны 1С",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Visit"
+              }
+            }
+          },
+          "description": "Данные визита"
+        }
+      },
+      "get": {
+        "summary": "Получение данных визита",
+        "operationId": "get-visit-UUID",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "tags": [
+          "Фронтенд",
+          "1С",
+          "Офис"
+        ],
+        "description": "Возвращает данные запрошенного визита"
+      },
+      "delete": {
+        "summary": "Удаление визита",
+        "operationId": "delete-visit-UUID",
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "tags": [
+          "1С",
+          "Офис"
+        ],
+        "description": "Запрос на удаление визита"
+      }
+    },
+    "/checklistsquestions/{UUID}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": "UUID",
+          "in": "path",
+          "required": true,
+          "description": "UUID вопроса чеклиста"
+        }
+      ],
+      "delete": {
+        "summary": "Удаление вопроса чеклиста",
+        "operationId": "delete-checklistsquestions-UUID",
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "description": "Запрос на удаление вопроса из чеклиста",
+        "tags": [
+          "Офис"
+        ]
+      },
+      "get": {
+        "summary": "",
+        "operationId": "get-checklistsquestions-UUID",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChecklistQuestion"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "description": "Возвращает запрошенный вопрос чеклиста",
+        "tags": [
+          "Офис",
+          "Фронтенд"
+        ]
+      }
+    },
+    "/shops/{UUID}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": "UUID",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Запрос данных магазина",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Shop"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "operationId": "get-shops-UUID",
+        "description": "Возвращает объект описания магазина"
+      },
+      "delete": {
+        "summary": "",
+        "operationId": "delete-shops-UUID",
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
       }
     }
   },
@@ -931,8 +1039,13 @@
         "x-examples": {
           "example-1": {}
         },
+        "x-tags": [
+          "1С",
+          "Офис",
+          "Фронтенд"
+        ],
         "properties": {
-          "visitUUID": {
+          "UUID": {
             "type": "string",
             "description": "Уникальный идентификатор визита",
             "format": "uuid"
@@ -973,12 +1086,7 @@
           }
         },
         "required": [
-          "visitUUID"
-        ],
-        "x-tags": [
-          "1С",
-          "Офис",
-          "Фронтенд"
+          "UUID"
         ]
       },
       "Shop": {
