@@ -407,35 +407,6 @@
           }
         ]
       },
-      "post": {
-        "summary": "Запись результатов нового визита",
-        "operationId": "post-visit",
-        "responses": {
-          "201": {
-            "description": "Created"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "403": {
-            "description": "Forbidden"
-          }
-        },
-        "description": "Точка для записи новых визитов. Ожидает объект описания результата визита",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Visit"
-              }
-            }
-          },
-          "description": "Объект описания результатов визита"
-        },
-        "tags": [
-          "Фронтенд"
-        ]
-      },
       "put": {
         "summary": "Обновление статуса визита",
         "operationId": "put-visit",
@@ -453,7 +424,7 @@
             "description": "Not Found"
           }
         },
-        "description": "Точка для обновления статуса оформления ПКО и создания накладной со стороны 1С, для обновления статуса и заказов со стороны фронтенда",
+        "description": "Точка для обновления статуса оформления ПКО и создания накладной со стороны 1С, для обновления данных визита со стороны фронтенда",
         "tags": [
           "1С"
         ],
@@ -465,7 +436,7 @@
               }
             }
           },
-          "description": "Данные о состоянии оформления ПКО и отгрузки товаров"
+          "description": "Данные визита"
         }
       },
       "parameters": []
@@ -534,7 +505,8 @@
                 "$ref": "#/components/schemas/Shop"
               }
             }
-          }
+          },
+          "description": "Данные магазина"
         }
       },
       "parameters": []
