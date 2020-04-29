@@ -712,7 +712,7 @@
         ]
       },
       "get": {
-        "summary": "",
+        "summary": "Получение вопроса чеклиста",
         "operationId": "get-checklistsquestions-UUID",
         "responses": {
           "200": {
@@ -756,7 +756,10 @@
       ],
       "get": {
         "summary": "Запрос данных магазина",
-        "tags": [],
+        "tags": [
+          "Офис",
+          "Фронтенд"
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -779,7 +782,7 @@
         "description": "Возвращает объект описания магазина"
       },
       "delete": {
-        "summary": "",
+        "summary": "Удаление магазина",
         "operationId": "delete-shops-UUID",
         "responses": {
           "204": {
@@ -794,7 +797,11 @@
           "404": {
             "description": "Not Found"
           }
-        }
+        },
+        "description": "Удаляет данные магазина с запрошенным UUID ",
+        "tags": [
+          "Офис"
+        ]
       }
     }
   },
