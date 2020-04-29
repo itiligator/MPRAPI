@@ -599,7 +599,9 @@
     "/checklistanswers": {
       "get": {
         "summary": "Запрос ответов на вопрос чеклиста",
-        "tags": [],
+        "tags": [
+          "Фронтенд"
+        ],
         "responses": {},
         "operationId": "get-checklistanswers",
         "description": "Возвращает запрошенные ответы на вопросы чеклистов",
@@ -658,7 +660,10 @@
               }
             }
           }
-        }
+        },
+        "tags": [
+          "Офис"
+        ]
       }
     }
   },
@@ -681,6 +686,10 @@
         "required": [
           "username",
           "password"
+        ],
+        "x-tags": [
+          "Фронтенд",
+          "Офис"
         ]
       },
       "Client": {
@@ -769,6 +778,11 @@
           "authorizedManagersID",
           "status",
           "dataBase"
+        ],
+        "x-tags": [
+          "1С",
+          "Офис",
+          "Фронтенд"
         ]
       },
       "TokenResponse": {
@@ -783,6 +797,11 @@
         },
         "required": [
           "token"
+        ],
+        "x-tags": [
+          "1С",
+          "Офис",
+          "Фронтенд"
         ]
       },
       "Product": {
@@ -807,6 +826,11 @@
           "item",
           "name",
           "description"
+        ],
+        "x-tags": [
+          "1С",
+          "Офис",
+          "Фронтенд"
         ]
       },
       "Price": {
@@ -835,6 +859,11 @@
           "priceType",
           "amount",
           "dataBase"
+        ],
+        "x-tags": [
+          "1С",
+          "Офис",
+          "Фронтенд"
         ]
       },
       "Orders": {
@@ -865,6 +894,11 @@
         },
         "required": [
           "productItem"
+        ],
+        "x-tags": [
+          "1С",
+          "Офис",
+          "Фронтенд"
         ]
       },
       "Visit": {
@@ -917,6 +951,11 @@
         },
         "required": [
           "visitUUID"
+        ],
+        "x-tags": [
+          "1С",
+          "Офис",
+          "Фронтенд"
         ]
       },
       "Shop": {
@@ -947,7 +986,11 @@
           "dataBase": {
             "type": "boolean"
           }
-        }
+        },
+        "x-tags": [
+          "Офис",
+          "Фронтенд"
+        ]
       },
       "ChecklistQuestion": {
         "title": "Вопрос из чеклиста",
@@ -985,6 +1028,10 @@
           "text",
           "answerType",
           "checklistType"
+        ],
+        "x-tags": [
+          "Офис",
+          "Фронтенд"
         ]
       },
       "ChecklistAnswer": {
@@ -1011,6 +1058,10 @@
           "questionUUID",
           "visitUUID",
           "answer"
+        ],
+        "x-tags": [
+          "Офис",
+          "Фронтенд"
         ]
       }
     },
