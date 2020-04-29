@@ -709,8 +709,8 @@
             "description": "Рекомендованный заказ"
           },
           "stockQuantity": {
-            "type": "string",
-            "description": "Складской остаток"
+            "description": "Складской остаток",
+            "type": "integer"
           }
         },
         "required": [
@@ -725,9 +725,10 @@
           "example-1": {}
         },
         "properties": {
-          "visitID": {
+          "visitUUID": {
             "type": "string",
-            "description": "Уникальный идентификатор визита"
+            "description": "Уникальный идентификатор визита",
+            "format": "uuid"
           },
           "date": {
             "type": "string",
@@ -765,14 +766,14 @@
           }
         },
         "required": [
-          "visitID"
+          "visitUUID"
         ]
       },
       "Shop": {
         "title": "Shop",
         "type": "object",
         "properties": {
-          "id": {
+          "ID": {
             "type": "string",
             "description": "Уникальный идентификатор магазина"
           },
