@@ -770,6 +770,14 @@
             "items": {
               "$ref": "#/components/schemas/OrderedProducts"
             }
+          },
+          "processed": {
+            "type": "boolean",
+            "description": "Создан ПКО"
+          },
+          "delivered": {
+            "type": "boolean",
+            "description": "Создана накладная на отгрузку"
           }
         },
         "required": [
@@ -787,16 +795,23 @@
         "description": "Объект с описанием состояния ПКО и отгрузки для визита",
         "properties": {
           "visitID": {
-            "type": "string"
+            "type": "string",
+            "description": "Уникальный идентификатор визита"
           },
-          "cashRecieptIssued": {
-            "type": "string"
+          "processed": {
+            "description": "Создан ПКО",
+            "type": "boolean"
           },
-          "": {
+          "orders": {
             "type": "array",
+            "description": "Массив данных о заказанныз товарах",
             "items": {
               "$ref": "#/components/schemas/OrderedProducts"
             }
+          },
+          "delivered": {
+            "type": "boolean",
+            "description": "Создана накладная на отгрузку"
           }
         },
         "required": [
@@ -808,19 +823,23 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "string"
+            "type": "string",
+            "description": "Уникальный идентификатор магазина"
           },
           "name": {
-            "type": "string"
+            "type": "string",
+            "description": "Наименование магазина"
           },
           "authorizedManagersID": {
             "type": "array",
+            "description": "Массив идентификаторов допущенных менеджеров ",
             "items": {
               "type": "string"
             }
           },
           "status": {
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Дейтсвует/не действует"
           },
           "dataBase": {
             "type": "boolean"
