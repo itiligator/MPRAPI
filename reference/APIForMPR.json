@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "API приложения МПР",
-    "description": "API приложения для менеджеров пивоварни Рогозец",
+    "description": "API приложения для менеджеров по развитию пивоварни Рогозец",
     "contact": {
       "email": "a.e.itiligator@gmail.com",
       "name": "Андрей"
@@ -25,17 +25,21 @@
       "description": "Запросы для интеграции с 1С"
     },
     {
+      "name": "Офис",
+      "description": "Запросы для клиентского приложения офиса"
+    },
+    {
       "name": "Фронтенд",
-      "description": "Запросы для пользовательских приложений"
+      "description": "Запросы для клиентского приложения менеджеров"
     }
   ],
   "paths": {
     "/api-token-auth": {
-      "summary": "саммари",
       "description": "точка запроса токена аутенфикации",
       "post": {
         "tags": [
-          "Фронтенд"
+          "Фронтенд",
+          "Офис"
         ],
         "summary": "Запрос токена аутентификации",
         "requestBody": {
@@ -69,15 +73,18 @@
         "operationId": "retrieve-token"
       }
     },
-    "/client/all": {
+    "/clients": {
       "post": {
         "summary": "Обновление перечня клиентов",
         "tags": [
           "1С"
         ],
         "responses": {
-          "200": {
-            "description": "OK"
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
           }
         },
         "operationId": "post-clients",
@@ -96,11 +103,12 @@
         }
       },
       "get": {
-        "summary": "Получение перечня клиентов и магазинов",
+        "summary": "Получение клиентов и магазинов",
         "tags": [
-          "Фронтенд"
+          "Фронтенд",
+          "Офис"
         ],
-        "description": "Получение перечня действующих клиентов и магазинов, для которых в authorizedManagersID присутствует ID запрашивающего менеджера (т.е. перечня клиентов запрашивающего менеджера)",
+        "description": "Возвращает массив клиентов и магазинов. При запросе от имени менеджера параметр authorizedManagersID игнорируется, а выдача автоматически фильтруется по ID запросившего менеджера",
         "responses": {
           "200": {
             "description": "OK",
@@ -114,17 +122,63 @@
                 }
               }
             }
+          },
+          "400": {
+            "description": "Bad Request"
           }
         },
-        "operationId": "get-clients"
+        "operationId": "get-clients",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "ID",
+            "description": "ID клиента"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "clientType",
+            "description": "Тип клиента"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "priceType",
+            "description": "Тип цен для клиента"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "authorizedManagersID",
+            "description": "ID менеджера"
+          },
+          {
+            "schema": {
+              "type": "boolean"
+            },
+            "in": "query",
+            "name": "status",
+            "description": "Действует/не действует"
+          }
+        ]
       },
       "parameters": []
     },
-    "/product/all": {
+    "/products": {
       "get": {
-        "summary": "Получение перечня товаров",
+        "summary": "Получение товаров",
         "tags": [
-          "Фронтенд"
+          "Фронтенд",
+          "Офис"
         ],
         "responses": {
           "200": {
@@ -139,19 +193,27 @@
                 }
               }
             }
+          },
+          "400": {
+            "description": "Bad Request"
           }
         },
         "operationId": "get-products",
-        "description": "Возвращает массив объектов товаров"
+        "description": "Возвращает массив объектов товаров",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "item",
+            "description": "Артикул товара"
+          }
+        ]
       },
       "post": {
         "summary": "Обновление перечня товаров",
         "operationId": "post-products",
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        },
         "description": "Обновление (на данный момент замена целиком) перечня товаров от 1С. Ожидает массив объектов описания товаров",
         "requestBody": {
           "content": {
@@ -167,23 +229,34 @@
         },
         "tags": [
           "1С"
-        ]
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
       },
       "parameters": []
     },
-    "/price/all": {
+    "/prices": {
       "post": {
         "summary": "Обновление перечня цен",
         "tags": [
           "1С"
         ],
         "responses": {
-          "200": {
-            "description": "OK"
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
           }
         },
         "operationId": "post-price",
-        "description": "Обновление (на данный момент замена целиком всех) перкчня цен от 1С. Ожидает массив объектов описания цен ",
+        "description": "Обновление (на данный момент замена целиком всех) перечня цен от 1С. Ожидает массив объектов описания цен ",
         "requestBody": {
           "content": {
             "application/json": {
@@ -198,9 +271,10 @@
         }
       },
       "get": {
-        "summary": "Запрос перечня цен",
+        "summary": "Получение цен",
         "tags": [
-          "Фронтенд"
+          "Фронтенд",
+          "Офис"
         ],
         "responses": {
           "200": {
@@ -215,18 +289,41 @@
                 }
               }
             }
+          },
+          "400": {
+            "description": "Bad Request"
           }
         },
         "operationId": "get-price",
-        "description": "Запрос перечня цен на товары. Вовзращает массив объектов цен"
+        "description": "Вовзращает массив цен",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "productItem",
+            "description": "Артикул товара"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "priceType",
+            "description": "Тип цены"
+          }
+        ]
       },
       "parameters": []
     },
-    "/visit/finished": {
+    "/visits": {
       "get": {
-        "summary": "Получение данных по всем завершенным визитам",
+        "summary": "Получение данных визита",
         "tags": [
-          "1С"
+          "Фронтенд",
+          "1С",
+          "Офис"
         ],
         "responses": {
           "200": {
@@ -236,40 +333,21 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/VisitResults"
+                    "$ref": "#/components/schemas/Visit"
                   }
                 }
               }
             }
-          }
-        },
-        "operationId": "get-visits",
-        "description": "Вовращает массив объектов описания результатов всех завершенных, но не запрошенных ранее визитов",
-        "parameters": []
-      },
-      "parameters": []
-    },
-    "/visit": {
-      "get": {
-        "summary": "Получение результата визита",
-        "tags": [
-          "Фронтенд",
-          "1С"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/VisitResults"
-                }
-              }
-            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
           }
         },
         "operationId": "get-visit",
-        "description": "Возвращает результат запрошенного визита",
+        "description": "Возвращает данные запрошенных визитов",
         "parameters": [
           {
             "schema": {
@@ -278,6 +356,54 @@
             "in": "query",
             "name": "id",
             "description": "ID визита"
+          },
+          {
+            "schema": {
+              "type": "boolean"
+            },
+            "in": "query",
+            "name": "processed",
+            "description": "Создан ПКО"
+          },
+          {
+            "schema": {
+              "type": "boolean"
+            },
+            "in": "query",
+            "name": "delivered",
+            "description": "Создана накладная на отгрузку"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "status",
+            "description": "Статус визита"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "managerID",
+            "description": "ID менеджера, создавшего визит"
+          },
+          {
+            "schema": {
+              "type": "boolean"
+            },
+            "in": "query",
+            "name": "uploaded",
+            "description": "Был запрошен 1С"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "clientID",
+            "description": "ID клиента"
           }
         ]
       },
@@ -287,14 +413,20 @@
         "responses": {
           "201": {
             "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
           }
         },
-        "description": "Точка для записи результатов новых визитов",
+        "description": "Точка для записи новых визитов. Ожидает объект описания результата визита",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/VisitResults"
+                "$ref": "#/components/schemas/Visit"
               }
             }
           },
@@ -310,9 +442,18 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
           }
         },
-        "description": "Точка для обновления статуса оформления ПКО и отгрузки по товарам заказа",
+        "description": "Точка для обновления статуса оформления ПКО и создания накладной",
         "tags": [
           "1С"
         ],
@@ -326,7 +467,77 @@
           },
           "description": "Данные о состоянии оформления ПКО и отгрузки товаров"
         }
-      }
+      },
+      "parameters": []
+    },
+    "/shops": {
+      "delete": {
+        "summary": "Удаление данных магазина",
+        "tags": [
+          "Офис"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "operationId": "delete-shop",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "ID",
+            "description": "ID магазина"
+          }
+        ],
+        "description": "Запрос на удаление данных магазина"
+      },
+      "put": {
+        "summary": "Создание или обновления данных магазина",
+        "tags": [
+          "Офис"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "operationId": "put-shop",
+        "description": "Запрос на добавление или обновление данных магазина",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Shop"
+              }
+            }
+          }
+        }
+      },
+      "parameters": []
     }
   },
   "components": {
@@ -526,10 +737,10 @@
           "productItem"
         ]
       },
-      "VisitResults": {
-        "title": "Результат визита",
+      "Visit": {
+        "title": "Визит",
         "type": "object",
-        "description": "Данные по результату визита",
+        "description": "Данные по визитам",
         "x-examples": {
           "example-1": {}
         },
@@ -591,14 +802,38 @@
         "required": [
           "visitID"
         ]
+      },
+      "Shop": {
+        "title": "Shop",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "authorizedManagersID": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "status": {
+            "type": "boolean"
+          },
+          "dataBase": {
+            "type": "boolean"
+          }
+        }
       }
     },
     "securitySchemes": {
       "Token ": {
-        "name": "Token ",
+        "name": "Authorization",
         "type": "apiKey",
         "in": "header",
-        "description": ""
+        "description": "В заголовке Authorization передавать \"Token X\" (пробел после Token!)"
       }
     }
   }
