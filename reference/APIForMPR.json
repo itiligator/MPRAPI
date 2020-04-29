@@ -602,7 +602,27 @@
         "tags": [
           "Фронтенд"
         ],
-        "responses": {},
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ChecklistAnswer"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
         "operationId": "get-checklistanswers",
         "description": "Возвращает запрошенные ответы на вопросы чеклистов",
         "parameters": [
