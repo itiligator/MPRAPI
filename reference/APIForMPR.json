@@ -633,7 +633,14 @@
         "operationId": "get-visit-UUID",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Visit"
+                }
+              }
+            }
           },
           "400": {
             "description": "Bad Request"
