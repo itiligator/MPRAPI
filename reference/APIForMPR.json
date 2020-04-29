@@ -687,10 +687,10 @@
           "dataBase"
         ]
       },
-      "OrderedProducts": {
-        "title": "Заказанный товар",
+      "Orders": {
+        "title": "Объект заказа",
         "type": "object",
-        "description": "Объект описания заказанного и отгруженного товара",
+        "description": "Объект описания заказанного, рекомендованного к заказу, остаточного и отгруженного товара",
         "properties": {
           "productItem": {
             "type": "string",
@@ -703,6 +703,14 @@
           "deliveredQuantity": {
             "description": "Отгруженное количество",
             "type": "integer"
+          },
+          "recommendedQuantity": {
+            "type": "integer",
+            "description": "Рекомендованный заказ"
+          },
+          "stockQuantity": {
+            "type": "string",
+            "description": "Складской остаток"
           }
         },
         "required": [
@@ -740,7 +748,7 @@
           "orders": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/OrderedProducts"
+              "$ref": "#/components/schemas/Orders"
             }
           },
           "processed": {
