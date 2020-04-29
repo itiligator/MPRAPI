@@ -510,6 +510,156 @@
         }
       },
       "parameters": []
+    },
+    "/checklistsquestions": {
+      "get": {
+        "summary": "Получение списка вопросов для чеклистов",
+        "tags": [
+          "Фронтенд"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ChecklistQuestion"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-checklistsquestions",
+        "description": "Возвращает массив всех вопросов для всех чеклистов"
+      },
+      "put": {
+        "summary": "Создание или уточнение вопроса",
+        "operationId": "put-checklistsquestions",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "description": "Ожидает объект описания вопроса. Создает или обновляет имеющийся вопрос для чеклиста",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChecklistQuestion"
+              }
+            }
+          }
+        },
+        "tags": [
+          "Офис"
+        ]
+      },
+      "delete": {
+        "summary": "Удаление вопроса",
+        "operationId": "delete-checklistsquestions",
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "id",
+            "description": "ID вопроса"
+          }
+        ],
+        "description": "Запрос на удаление вопроса из чеклиста"
+      }
+    },
+    "/checklistanswers": {
+      "get": {
+        "summary": "Запрос ответов на вопрос чеклиста",
+        "tags": [],
+        "responses": {},
+        "operationId": "get-checklistanswers",
+        "description": "Возвращает запрошенные ответы на вопросы чеклистов",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "checklisttype",
+            "description": "тип чеклиста"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "visit",
+            "description": "UUID визита"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "client",
+            "description": "ID клиента или магазина"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "question",
+            "description": "UUID вопроса"
+          }
+        ]
+      },
+      "post": {
+        "summary": "Запись ответов на вопросы чеклиста",
+        "operationId": "post-checklistanswers",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Ожидает массив ответов на вопросы чеклиста",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ChecklistAnswer"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -772,10 +922,12 @@
       "Shop": {
         "title": "Shop",
         "type": "object",
+        "description": "Данные магазина",
         "properties": {
-          "ID": {
+          "UUID": {
             "type": "string",
-            "description": "Уникальный идентификатор магазина"
+            "description": "Уникальный идентификатор магазина",
+            "format": "uuid"
           },
           "name": {
             "type": "string",
@@ -796,6 +948,70 @@
             "type": "boolean"
           }
         }
+      },
+      "ChecklistQuestion": {
+        "title": "Вопрос из чеклиста",
+        "type": "object",
+        "description": "Данные о вопросе и формате ответа из чеклиста",
+        "properties": {
+          "UUID": {
+            "type": "string",
+            "description": "Уникальный идентификтор вопроса",
+            "format": "uuid"
+          },
+          "text": {
+            "type": "string",
+            "description": "текст вопроса"
+          },
+          "answerType": {
+            "type": "string",
+            "description": "Тип ответа",
+            "enum": [
+              "text",
+              "priceqty"
+            ]
+          },
+          "checklistType": {
+            "type": "string",
+            "description": "Тип чеклиста",
+            "enum": [
+              "store",
+              "client"
+            ]
+          }
+        },
+        "required": [
+          "UUID",
+          "text",
+          "answerType",
+          "checklistType"
+        ]
+      },
+      "ChecklistAnswer": {
+        "title": "Ответ на вопрос из чеклиста",
+        "type": "object",
+        "description": "Ответ на поставленный вопрос, данный в ходе визита",
+        "properties": {
+          "questionUUID": {
+            "type": "string",
+            "description": "UUID вопроса",
+            "format": "uuid"
+          },
+          "visitUUID": {
+            "type": "string",
+            "description": "UUID визита, в котором был дан ответ",
+            "format": "uuid"
+          },
+          "answer": {
+            "type": "string",
+            "description": "Ответ на вопрос"
+          }
+        },
+        "required": [
+          "questionUUID",
+          "visitUUID",
+          "answer"
+        ]
       }
     },
     "securitySchemes": {
