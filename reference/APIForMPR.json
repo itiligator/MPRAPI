@@ -803,6 +803,81 @@
           "Офис"
         ]
       }
+    },
+    "/users": {
+      "get": {
+        "summary": "Получение массива пользователей",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UserProfile"
+                  }
+                }
+              }
+            }
+          },
+          "": {
+            "description": "Массив данных пользователей",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UserProfile"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-users",
+        "description": "Возвращает массив данных пользователей"
+      }
+    },
+    "/users/{UUID}": {
+      "get": {
+        "summary": "Получение данных пользователя",
+        "tags": [],
+        "responses": {},
+        "operationId": "get-users-UUID",
+        "description": "Возвращает данные пользователя",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserProfile"
+              }
+            }
+          },
+          "description": "Данные пользователя"
+        }
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "UUID",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "delete": {
+        "summary": "Удаление пользователя",
+        "operationId": "delete-users-UUID",
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "description": "Удаляет пользователя"
+      }
     }
   },
   "components": {
@@ -1201,6 +1276,29 @@
           "Офис",
           "Фронтенд"
         ]
+      },
+      "UserProfile": {
+        "title": "User",
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string",
+            "description": "Имя"
+          },
+          "lastName": {
+            "type": "string",
+            "description": "Фамилия"
+          },
+          "middleName": {
+            "type": "string",
+            "description": "Отчество"
+          },
+          "UUID": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Уникальный идентификатор пользователя"
+          }
+        }
       }
     },
     "securitySchemes": {
