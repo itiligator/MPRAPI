@@ -1249,7 +1249,7 @@
             "type": "string",
             "description": "Отчество"
           },
-          "UUID": {
+          "ID": {
             "type": "string",
             "format": "uuid",
             "description": "Уникальный идентификатор пользователя"
