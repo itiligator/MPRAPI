@@ -1121,6 +1121,10 @@
           "status": {
             "type": "integer",
             "description": "Статус визита"
+          },
+          "managerID": {
+            "type": "string",
+            "description": "ID менеджера, который выполнил визит"
           }
         },
         "required": [
