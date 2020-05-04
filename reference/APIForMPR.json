@@ -1037,7 +1037,7 @@
           "database"
         ]
       },
-      "Orders": {
+      "Order": {
         "title": "Объект заказа",
         "type": "object",
         "description": "Объект описания заказанного, рекомендованного к заказу, остаточного и отгруженного товара",
@@ -1107,7 +1107,7 @@
           "orders": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/Orders"
+              "$ref": "#/components/schemas/Order"
             }
           },
           "processed": {
