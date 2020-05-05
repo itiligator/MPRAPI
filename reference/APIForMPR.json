@@ -1252,14 +1252,9 @@
             "type": "string",
             "description": "Фамилия"
           },
-          "middleName": {
-            "type": "string",
-            "description": "Отчество"
-          },
           "ID": {
             "type": "string",
-            "format": "uuid",
-            "description": "Уникальный идентификатор пользователя"
+            "description": "Уникальный идентификатор пользователя в 1С"
           }
         }
       }
