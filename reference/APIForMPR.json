@@ -1172,6 +1172,10 @@
         "title": "Вопрос из чеклиста",
         "type": "object",
         "description": "Данные о вопросе и формате ответа из чеклиста",
+        "x-tags": [
+          "Офис",
+          "Фронтенд"
+        ],
         "properties": {
           "UUID": {
             "type": "string",
@@ -1182,15 +1186,7 @@
             "type": "string",
             "description": "текст вопроса"
           },
-          "answerType": {
-            "type": "string",
-            "description": "Тип ответа",
-            "enum": [
-              "text",
-              "priceqty"
-            ]
-          },
-          "checklistType": {
+          "clientType": {
             "type": "string",
             "description": "Тип чеклиста",
             "enum": [
@@ -1202,18 +1198,17 @@
         "required": [
           "UUID",
           "text",
-          "answerType",
-          "checklistType"
-        ],
-        "x-tags": [
-          "Офис",
-          "Фронтенд"
+          "clientType"
         ]
       },
       "ChecklistAnswer": {
         "title": "Ответ на вопрос из чеклиста",
         "type": "object",
         "description": "Ответ на поставленный вопрос, данный в ходе визита",
+        "x-tags": [
+          "Офис",
+          "Фронтенд"
+        ],
         "properties": {
           "questionUUID": {
             "type": "string",
@@ -1225,19 +1220,19 @@
             "description": "UUID визита, в котором был дан ответ",
             "format": "uuid"
           },
-          "answer": {
+          "answer1": {
             "type": "string",
-            "description": "Ответ на вопрос"
+            "description": "Ответ на вопрос/количество"
+          },
+          "answer2": {
+            "type": "string",
+            "description": "Примечание/цена"
           }
         },
         "required": [
           "questionUUID",
           "visitUUID",
-          "answer"
-        ],
-        "x-tags": [
-          "Офис",
-          "Фронтенд"
+          "answer1"
         ]
       },
       "UserProfile": {
