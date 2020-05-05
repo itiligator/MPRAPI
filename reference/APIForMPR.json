@@ -1138,7 +1138,7 @@
             "type": "boolean",
             "description": "Создан ПКО"
           },
-          "delivered": {
+          "invoice": {
             "type": "boolean",
             "description": "Создана накладная на отгрузку"
           },
