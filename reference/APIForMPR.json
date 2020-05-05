@@ -1068,11 +1068,11 @@
           "Фронтенд"
         ],
         "properties": {
-          "productItem": {
+          "product_ID": {
             "type": "string",
             "description": "Артикул товара"
           },
-          "orderedQuantity": {
+          "order": {
             "type": "integer",
             "description": "Заказанное количество"
           },
@@ -1080,17 +1080,20 @@
             "description": "Отгруженное количество",
             "type": "integer"
           },
-          "recommendedQuantity": {
+          "recommend": {
             "type": "integer",
             "description": "Рекомендованный заказ"
           },
-          "stockQuantity": {
+          "balance": {
             "description": "Складской остаток",
             "type": "integer"
+          },
+          "sales": {
+            "type": "string"
           }
         },
         "required": [
-          "productItem"
+          "product_ID"
         ]
       },
       "Visit": {
