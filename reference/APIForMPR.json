@@ -979,9 +979,17 @@
         "title": "Товар",
         "type": "object",
         "description": "Товары пивоварни",
+        "x-tags": [
+          "1С",
+          "Офис",
+          "Фронтенд"
+        ],
         "properties": {
           "item": {
-            "type": "string",
+            "type": [
+              "string",
+              "integer"
+            ],
             "description": "Артикул товара"
           },
           "name": {
@@ -997,11 +1005,6 @@
           "item",
           "name",
           "description"
-        ],
-        "x-tags": [
-          "1С",
-          "Офис",
-          "Фронтенд"
         ]
       },
       "Price": {
