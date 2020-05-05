@@ -1062,6 +1062,11 @@
         "title": "Объект заказа",
         "type": "object",
         "description": "Объект описания заказанного, рекомендованного к заказу, остаточного и отгруженного товара",
+        "x-tags": [
+          "1С",
+          "Офис",
+          "Фронтенд"
+        ],
         "properties": {
           "productItem": {
             "type": "string",
@@ -1071,7 +1076,7 @@
             "type": "integer",
             "description": "Заказанное количество"
           },
-          "deliveredQuantity": {
+          "delivered": {
             "description": "Отгруженное количество",
             "type": "integer"
           },
@@ -1086,11 +1091,6 @@
         },
         "required": [
           "productItem"
-        ],
-        "x-tags": [
-          "1С",
-          "Офис",
-          "Фронтенд"
         ]
       },
       "Visit": {
