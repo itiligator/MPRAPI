@@ -359,7 +359,7 @@
               "type": "boolean"
             },
             "in": "query",
-            "name": "delivered",
+            "name": "invoice",
             "description": "Создана накладная на отгрузку"
           },
           {
@@ -1156,6 +1156,10 @@
         "title": "Shop",
         "type": "object",
         "description": "Данные магазина",
+        "x-tags": [
+          "Офис",
+          "Фронтенд"
+        ],
         "properties": {
           "UUID": {
             "type": "string",
@@ -1176,15 +1180,8 @@
           "status": {
             "type": "boolean",
             "description": "Дейтсвует/не действует"
-          },
-          "dataBase": {
-            "type": "boolean"
           }
-        },
-        "x-tags": [
-          "Офис",
-          "Фронтенд"
-        ]
+        }
       },
       "ChecklistQuestion": {
         "title": "Вопрос из чеклиста",
