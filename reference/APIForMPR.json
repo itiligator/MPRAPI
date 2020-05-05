@@ -1193,6 +1193,10 @@
               "store",
               "client"
             ]
+          },
+          "active": {
+            "type": "boolean",
+            "description": "Задавать ли вопрос"
           }
         },
         "required": [
