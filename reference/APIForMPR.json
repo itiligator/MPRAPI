@@ -1046,19 +1046,16 @@
             "type": "string",
             "description": "Тип цены"
           },
-          "amount": {
+          "price_1": {
             "type": "string",
             "description": "Величина в рублях"
           },
-          "database": {
-            "type": "boolean"
+          "price_0": {
+            "type": "string"
           }
         },
         "required": [
-          "productItem",
-          "priceType",
-          "amount",
-          "database"
+          "productItem"
         ]
       },
       "Order": {
