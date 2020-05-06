@@ -108,7 +108,7 @@
           "Фронтенд",
           "Офис"
         ],
-        "description": "Возвращает массив клиентов и магазинов. При запросе от имени менеджера параметр authorizedManagersID игнорируется, а выдача автоматически фильтруется по ID запросившего менеджера",
+        "description": "Возвращает массив клиентов и магазинов. При запросе от имени МПР параметр authorizedManagersID игнорируется, а выдача автоматически фильтруется по ID запросившего менеджера",
         "responses": {
           "200": {
             "description": "OK",
@@ -134,7 +134,7 @@
               "type": "string"
             },
             "in": "query",
-            "name": "ID",
+            "name": "INN",
             "description": "ID клиента"
           },
           {
@@ -893,11 +893,12 @@
         "type": "object",
         "description": "Данные клиента",
         "x-examples": {},
+        "x-tags": [
+          "1С",
+          "Офис",
+          "Фронтенд"
+        ],
         "properties": {
-          "clientID": {
-            "type": "string",
-            "description": "Уникальный идентификатор клиента"
-          },
           "name": {
             "type": "string",
             "description": "Наименование клиента для отображения пользователю"
@@ -966,7 +967,6 @@
           }
         },
         "required": [
-          "clientID",
           "name",
           "clientType",
           "priceType",
@@ -974,11 +974,6 @@
           "authorizedManagersID",
           "status",
           "dataBase"
-        ],
-        "x-tags": [
-          "1С",
-          "Офис",
-          "Фронтенд"
         ]
       },
       "TokenResponse": {
@@ -1004,6 +999,11 @@
         "title": "Товар",
         "type": "object",
         "description": "Товары пивоварни",
+        "x-tags": [
+          "1С",
+          "Офис",
+          "Фронтенд"
+        ],
         "properties": {
           "item": {
             "type": [
@@ -1025,17 +1025,17 @@
           "item",
           "name",
           "description"
-        ],
-        "x-tags": [
-          "1С",
-          "Офис",
-          "Фронтенд"
         ]
       },
       "Price": {
         "title": "Цена",
         "type": "object",
         "description": "Цена данного типа для товара ",
+        "x-tags": [
+          "1С",
+          "Офис",
+          "Фронтенд"
+        ],
         "properties": {
           "productItem": {
             "type": "string",
@@ -1045,209 +1045,18 @@
             "type": "string",
             "description": "Тип цены"
           },
-          "price_0": {
-            "type": "string"
-          },
           "price_1": {
             "type": "string",
-            "description": "Величина в рублях"
+            "description": "Цена в рублях 1"
+          },
+          "price_0": {
+            "type": "string",
+            "description": "Цена в рублях 2"
           }
         },
         "required": [
           "productItem"
-        ],
-        "x-tags": [
-          "1С",
-          "Офис",
-          "Фронтенд"
         ]
-      },
-      "Visit": {
-        "title": "Визит",
-        "type": "object",
-        "description": "Данные по визитам",
-        "x-examples": {},
-        "x-tags": [
-          "1С",
-          "Офис",
-          "Фронтенд"
-        ],
-        "properties": {
-          "UUID": {
-            "type": "string",
-            "description": "Уникальный идентификатор визита",
-            "format": "uuid"
-          },
-          "date": {
-            "type": "string",
-            "format": "date",
-            "description": "Дата совершения визита"
-          },
-          "dataBase": {
-            "type": "boolean"
-          },
-          "clientID": {
-            "type": "string",
-            "description": "Уникальный идентификатор клиента"
-          },
-          "payment": {
-            "type": "integer",
-            "description": "Принятая оплата"
-          },
-          "orders": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Order"
-            }
-          },
-          "processed": {
-            "type": "boolean",
-            "description": "Создан ПКО"
-          },
-          "status": {
-            "type": "integer",
-            "description": "Статус визита"
-          },
-          "managerID": {
-            "type": "string",
-            "description": "ID менеджера, который выполнил визит"
-          },
-          "invoice": {
-            "type": "boolean",
-            "description": "Создана накладная на отгрузку"
-          }
-        },
-        "required": [
-          "UUID"
-        ]
-      },
-      "Shop": {
-        "title": "Shop",
-        "type": "object",
-        "description": "Данные магазина",
-        "properties": {
-          "UUID": {
-            "type": "string",
-            "description": "Уникальный идентификатор магазина",
-            "format": "uuid"
-          },
-          "name": {
-            "type": "string",
-            "description": "Наименование магазина"
-          },
-          "authorizedManagersID": {
-            "type": "array",
-            "description": "Массив идентификаторов допущенных менеджеров ",
-            "items": {
-              "type": "string"
-            }
-          },
-          "status": {
-            "type": "boolean",
-            "description": "Дейтсвует/не действует"
-          }
-        },
-        "x-tags": [
-          "Офис",
-          "Фронтенд"
-        ]
-      },
-      "ChecklistQuestion": {
-        "title": "Вопрос из чеклиста",
-        "type": "object",
-        "description": "Данные о вопросе и формате ответа из чеклиста",
-        "properties": {
-          "UUID": {
-            "type": "string",
-            "description": "Уникальный идентификтор вопроса",
-            "format": "uuid"
-          },
-          "text": {
-            "type": "string",
-            "description": "текст вопроса"
-          },
-          "active": {
-            "type": "boolean",
-            "description": "Задавать ли вопрос"
-          },
-          "clientType": {
-            "type": "string",
-            "description": "Тип чеклиста",
-            "enum": [
-              "store",
-              "client"
-            ]
-          }
-        },
-        "required": [
-          "UUID",
-          "text",
-          "clientType"
-        ],
-        "x-tags": [
-          "Офис",
-          "Фронтенд"
-        ]
-      },
-      "ChecklistAnswer": {
-        "title": "Ответ на вопрос из чеклиста",
-        "type": "object",
-        "description": "Ответ на поставленный вопрос, данный в ходе визита",
-        "properties": {
-          "questionUUID": {
-            "type": "string",
-            "description": "UUID вопроса",
-            "format": "uuid"
-          },
-          "visitUUID": {
-            "type": "string",
-            "description": "UUID визита, в котором был дан ответ",
-            "format": "uuid"
-          },
-          "answer2": {
-            "type": "string",
-            "description": "Примечание/цена"
-          },
-          "answer1": {
-            "type": "string",
-            "description": "Ответ на вопрос/количество"
-          }
-        },
-        "required": [
-          "questionUUID",
-          "visitUUID",
-          "answer1"
-        ],
-        "x-tags": [
-          "Офис",
-          "Фронтенд"
-        ]
-      },
-      "UserProfile": {
-        "title": "User",
-        "type": "object",
-        "properties": {
-          "firstName": {
-            "type": "string",
-            "description": "Имя"
-          },
-          "lastName": {
-            "type": "string",
-            "description": "Фамилия"
-          },
-          "ID": {
-            "type": "string",
-            "description": "Уникальный идентификатор пользователя в 1С"
-          }
-        }
-      },
-      "TypePrice": {
-        "title": "TypePrice",
-        "type": "array",
-        "items": {
-          "type": "string"
-        },
-        "description": "Массив типов цен"
       },
       "Order": {
         "title": "Объект заказа",
@@ -1285,6 +1094,201 @@
         },
         "required": [
           "product_ID"
+        ]
+      },
+      "Visit": {
+        "title": "Визит",
+        "type": "object",
+        "description": "Данные по визитам",
+        "x-examples": {},
+        "x-tags": [
+          "1С",
+          "Офис",
+          "Фронтенд"
+        ],
+        "properties": {
+          "UUID": {
+            "type": "string",
+            "description": "Уникальный идентификатор визита",
+            "format": "uuid"
+          },
+          "date": {
+            "type": "string",
+            "format": "date",
+            "description": "Дата совершения визита"
+          },
+          "dataBase": {
+            "type": "boolean"
+          },
+          "clientINN": {
+            "type": "string",
+            "description": "Уникальный идентификатор клиента"
+          },
+          "payment": {
+            "type": "integer",
+            "description": "Принятая оплата"
+          },
+          "orders": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Order"
+            }
+          },
+          "processed": {
+            "type": "boolean",
+            "description": "Создан ПКО"
+          },
+          "invoice": {
+            "type": "boolean",
+            "description": "Создана накладная на отгрузку"
+          },
+          "status": {
+            "type": "integer",
+            "description": "Статус визита"
+          },
+          "managerID": {
+            "type": "string",
+            "description": "ID менеджера, который выполнил визит"
+          }
+        },
+        "required": [
+          "UUID"
+        ]
+      },
+      "Shop": {
+        "title": "Shop",
+        "type": "object",
+        "description": "Данные магазина",
+        "x-tags": [
+          "Офис",
+          "Фронтенд"
+        ],
+        "properties": {
+          "UUID": {
+            "type": "string",
+            "description": "Уникальный идентификатор магазина",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string",
+            "description": "Наименование магазина"
+          },
+          "authorizedManagersID": {
+            "type": "array",
+            "description": "Массив идентификаторов допущенных менеджеров ",
+            "items": {
+              "type": "string"
+            }
+          },
+          "status": {
+            "type": "boolean",
+            "description": "Дейтсвует/не действует"
+          }
+        }
+      },
+      "ChecklistQuestion": {
+        "title": "Вопрос из чеклиста",
+        "type": "object",
+        "description": "Данные о вопросе и формате ответа из чеклиста",
+        "x-tags": [
+          "Офис",
+          "Фронтенд"
+        ],
+        "properties": {
+          "UUID": {
+            "type": "string",
+            "description": "Уникальный идентификтор вопроса",
+            "format": "uuid"
+          },
+          "text": {
+            "type": "string",
+            "description": "текст вопроса"
+          },
+          "clientType": {
+            "type": "string",
+            "description": "Тип чеклиста",
+            "enum": [
+              "store",
+              "client"
+            ]
+          },
+          "active": {
+            "type": "boolean",
+            "description": "Задавать ли вопрос"
+          }
+        },
+        "required": [
+          "UUID",
+          "text",
+          "clientType"
+        ]
+      },
+      "ChecklistAnswer": {
+        "title": "Ответ на вопрос из чеклиста",
+        "type": "object",
+        "description": "Ответ на поставленный вопрос, данный в ходе визита",
+        "x-tags": [
+          "Офис",
+          "Фронтенд"
+        ],
+        "properties": {
+          "questionUUID": {
+            "type": "string",
+            "description": "UUID вопроса",
+            "format": "uuid"
+          },
+          "visitUUID": {
+            "type": "string",
+            "description": "UUID визита, в котором был дан ответ",
+            "format": "uuid"
+          },
+          "answer1": {
+            "type": "string",
+            "description": "Ответ на вопрос/количество"
+          },
+          "answer2": {
+            "type": "string",
+            "description": "Примечание/цена"
+          }
+        },
+        "required": [
+          "questionUUID",
+          "visitUUID",
+          "answer1"
+        ]
+      },
+      "UserProfile": {
+        "title": "Профиль пользователей",
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string",
+            "description": "Имя"
+          },
+          "lastName": {
+            "type": "string",
+            "description": "Фамилия"
+          },
+          "ID": {
+            "type": "string",
+            "description": "Уникальный идентификатор пользователя в 1С"
+          }
+        },
+        "description": "Моделька профиля пользователей",
+        "x-tags": [
+          "Фронтенд",
+          "Офис"
+        ]
+      },
+      "TypePrice": {
+        "title": "TypePrice",
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "description": "Массив типов цен",
+        "x-tags": [
+          "1С"
         ]
       }
     },
