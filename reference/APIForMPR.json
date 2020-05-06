@@ -1280,7 +1280,7 @@
             "type": "integer"
           },
           "sales": {
-            "type": "string"
+            "type": "integer"
           }
         },
         "required": [
