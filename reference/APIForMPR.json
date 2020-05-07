@@ -1067,7 +1067,58 @@
         "title": "Визит",
         "type": "object",
         "description": "Данные по визитам",
-        "x-examples": {},
+        "x-examples": {
+          "Передаваемые приложением МПР данные визита в момент его окончания": {
+            "payment": 3461,
+            "status": 2,
+            "orders": [
+              {
+                "productItem": "5324",
+                "order": 40,
+                "recommend": 50
+              },
+              {
+                "productItem": "1123",
+                "order": 20,
+                "recommend": 15
+              },
+              {
+                "productItem": "a642",
+                "order": 18,
+                "recommend": 32
+              }
+            ]
+          },
+          "Обновление со стороны 1Сстатуса создания ПКО": {
+            "processed": true
+          },
+          "Обновление со стороны 1С данных визита при создании накладной": {
+            "invoice": true,
+            "orders": [
+              {
+                "productItem": "5324",
+                "delivered": 40
+              },
+              {
+                "productItem": "1123",
+                "delivered": 18
+              },
+              {
+                "productItem": "a642",
+                "delivered": 15
+              }
+            ]
+          },
+          "Передаваемые офисом (бэкендом) данные запланированного визита": {
+            "clientINN": "245017014629",
+            "status": 0,
+            "managerID": "3"
+          },
+          "Передаваемые приложением МПР данные визита в момент его начала": {
+            "clientINN": "245017014629",
+            "status": 1
+          }
+        },
         "x-tags": [
           "1С",
           "Офис",
@@ -1117,10 +1168,7 @@
             "type": "string",
             "description": "Уникальный идентификатор клиента"
           }
-        },
-        "required": [
-          "UUID"
-        ]
+        }
       },
       "Shop": {
         "title": "Shop",
