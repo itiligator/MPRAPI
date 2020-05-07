@@ -406,44 +406,6 @@
       },
       "parameters": []
     },
-    "/shops": {
-      "put": {
-        "summary": "Создание или обновления данных магазина",
-        "tags": [
-          "Офис"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "201": {
-            "description": "Created"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        },
-        "operationId": "put-shop",
-        "description": "Запрос на добавление или обновление данных магазина",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Shop"
-              }
-            }
-          },
-          "description": "Данные магазина"
-        }
-      },
-      "parameters": []
-    },
     "/checklistsquestions": {
       "get": {
         "summary": "Получение списка вопросов для чеклистов",
@@ -814,6 +776,38 @@
           }
         },
         "description": "Удаляет данные магазина с запрошенным UUID ",
+        "tags": [
+          "Офис"
+        ]
+      },
+      "put": {
+        "summary": "Создание или обновления данных магазина",
+        "operationId": "put-shops-UUID",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "description": "Запрос на добавление или обновление данных магазина",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Shop"
+              }
+            }
+          },
+          "description": "Данные магазина"
+        },
         "tags": [
           "Офис"
         ]
