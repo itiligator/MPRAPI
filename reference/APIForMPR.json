@@ -552,7 +552,7 @@
         ]
       }
     },
-    "/visit/{UUID}": {
+    "/visits/{UUID}": {
       "parameters": [
         {
           "schema": {
