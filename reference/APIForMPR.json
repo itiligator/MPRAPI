@@ -388,19 +388,19 @@
           },
           {
             "schema": {
-              "type": "boolean"
+              "type": "string"
             },
             "in": "query",
-            "name": "uploaded",
-            "description": "Был выгружен в 1С"
+            "name": "date",
+            "description": "Дата в формате YYYY-MM-DD"
           },
           {
             "schema": {
               "type": "string"
             },
             "in": "query",
-            "name": "clientID",
-            "description": "ID клиента"
+            "name": "clientINN",
+            "description": "ИНН клиента"
           }
         ]
       },
