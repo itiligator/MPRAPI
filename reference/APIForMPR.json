@@ -1339,6 +1339,74 @@
         "required": [
           "productItem"
         ]
+      },
+      "VisitArray": {
+        "title": "VisitArray",
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/Visit"
+        },
+        "x-examples": {
+          "Пример данных визитов": [
+            {
+              "UUID": "20a52709-5ddd-4a5f-b13d-fe707e16cae6",
+              "date": "2020-05-16",
+              "clientINN": "245209759343",
+              "managerID": "6",
+              "payment": 3461,
+              "status": 2,
+              "invoice": false,
+              "processed": false,
+              "dataBase": false,
+              "orders": [
+                {
+                  "productItem": "5324",
+                  "order": 40,
+                  "recommend": 50
+                },
+                {
+                  "productItem": "1123",
+                  "order": 20,
+                  "recommend": 15
+                },
+                {
+                  "productItem": "a642",
+                  "order": 18,
+                  "recommend": 32
+                }
+              ]
+            },
+            {
+              "UUID": "616f185e-54f4-465d-b9cb-a7c34b8599c5",
+              "date": "2020-05-18",
+              "clientINN": "244873285740",
+              "managerID": "8",
+              "payment": 8965,
+              "status": 2,
+              "invoice": false,
+              "processed": false,
+              "dataBase": false,
+              "orders": [
+                {
+                  "productItem": "8978",
+                  "order": 10,
+                  "recommend": 10
+                },
+                {
+                  "productItem": "767",
+                  "order": 6,
+                  "recommend": 8
+                }
+              ]
+            }
+          ]
+        },
+        "description": "",
+        "x-tags": [
+          "1С",
+          "Офис",
+          "Фронтенд"
+        ]
       }
     },
     "securitySchemes": {
