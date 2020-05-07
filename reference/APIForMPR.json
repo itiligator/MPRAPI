@@ -309,6 +309,14 @@
             "in": "query",
             "name": "priceType",
             "description": "Тип цены"
+          },
+          {
+            "schema": {
+              "type": "boolean"
+            },
+            "in": "query",
+            "name": "DB",
+            "description": ""
           }
         ]
       },
@@ -893,11 +901,6 @@
         "type": "object",
         "description": "Данные клиента",
         "x-examples": {},
-        "x-tags": [
-          "1С",
-          "Офис",
-          "Фронтенд"
-        ],
         "properties": {
           "name": {
             "type": "string",
@@ -974,6 +977,11 @@
           "authorizedManagersID",
           "status",
           "dataBase"
+        ],
+        "x-tags": [
+          "1С",
+          "Офис",
+          "Фронтенд"
         ]
       },
       "TokenResponse": {
@@ -999,11 +1007,6 @@
         "title": "Товар",
         "type": "object",
         "description": "Товары пивоварни",
-        "x-tags": [
-          "1С",
-          "Офис",
-          "Фронтенд"
-        ],
         "properties": {
           "item": {
             "type": [
@@ -1025,6 +1028,11 @@
           "item",
           "name",
           "description"
+        ],
+        "x-tags": [
+          "1С",
+          "Офис",
+          "Фронтенд"
         ]
       },
       "Price": {
@@ -1045,56 +1053,15 @@
             "type": "string",
             "description": "Тип цены"
           },
-          "price_1": {
-            "type": "string",
-            "description": "Цена в рублях 1"
-          },
           "price_0": {
             "type": "string",
             "description": "Цена в рублях 2"
-          }
-        },
-        "required": [
-          "productItem"
-        ]
-      },
-      "Order": {
-        "title": "Объект заказа",
-        "type": "object",
-        "description": "Объект описания заказанного, рекомендованного к заказу, остаточного и отгруженного товара",
-        "x-tags": [
-          "1С",
-          "Офис",
-          "Фронтенд"
-        ],
-        "properties": {
-          "product_ID": {
+          },
+          "price_1": {
             "type": "string",
-            "description": "Артикул товара"
-          },
-          "order": {
-            "type": "integer",
-            "description": "Заказанное количество"
-          },
-          "delivered": {
-            "description": "Отгруженное количество",
-            "type": "integer"
-          },
-          "recommend": {
-            "type": "integer",
-            "description": "Рекомендованный заказ"
-          },
-          "balance": {
-            "description": "Складской остаток",
-            "type": "integer"
-          },
-          "sales": {
-            "type": "integer"
+            "description": "Цена в рублях 1"
           }
-        },
-        "required": [
-          "product_ID"
-        ]
+        }
       },
       "Visit": {
         "title": "Визит",
@@ -1120,10 +1087,6 @@
           "dataBase": {
             "type": "boolean"
           },
-          "clientINN": {
-            "type": "string",
-            "description": "Уникальный идентификатор клиента"
-          },
           "payment": {
             "type": "integer",
             "description": "Принятая оплата"
@@ -1138,10 +1101,6 @@
             "type": "boolean",
             "description": "Создан ПКО"
           },
-          "invoice": {
-            "type": "boolean",
-            "description": "Создана накладная на отгрузку"
-          },
           "status": {
             "type": "integer",
             "description": "Статус визита"
@@ -1149,6 +1108,14 @@
           "managerID": {
             "type": "string",
             "description": "ID менеджера, который выполнил визит"
+          },
+          "invoice": {
+            "type": "boolean",
+            "description": "Создана накладная на отгрузку"
+          },
+          "clientINN": {
+            "type": "string",
+            "description": "Уникальный идентификатор клиента"
           }
         },
         "required": [
@@ -1159,10 +1126,6 @@
         "title": "Shop",
         "type": "object",
         "description": "Данные магазина",
-        "x-tags": [
-          "Офис",
-          "Фронтенд"
-        ],
         "properties": {
           "UUID": {
             "type": "string",
@@ -1184,16 +1147,16 @@
             "type": "boolean",
             "description": "Дейтсвует/не действует"
           }
-        }
+        },
+        "x-tags": [
+          "Офис",
+          "Фронтенд"
+        ]
       },
       "ChecklistQuestion": {
         "title": "Вопрос из чеклиста",
         "type": "object",
         "description": "Данные о вопросе и формате ответа из чеклиста",
-        "x-tags": [
-          "Офис",
-          "Фронтенд"
-        ],
         "properties": {
           "UUID": {
             "type": "string",
@@ -1204,6 +1167,10 @@
             "type": "string",
             "description": "текст вопроса"
           },
+          "active": {
+            "type": "boolean",
+            "description": "Задавать ли вопрос"
+          },
           "clientType": {
             "type": "string",
             "description": "Тип чеклиста",
@@ -1211,26 +1178,22 @@
               "store",
               "client"
             ]
-          },
-          "active": {
-            "type": "boolean",
-            "description": "Задавать ли вопрос"
           }
         },
         "required": [
           "UUID",
           "text",
           "clientType"
+        ],
+        "x-tags": [
+          "Офис",
+          "Фронтенд"
         ]
       },
       "ChecklistAnswer": {
         "title": "Ответ на вопрос из чеклиста",
         "type": "object",
         "description": "Ответ на поставленный вопрос, данный в ходе визита",
-        "x-tags": [
-          "Офис",
-          "Фронтенд"
-        ],
         "properties": {
           "questionUUID": {
             "type": "string",
@@ -1242,19 +1205,23 @@
             "description": "UUID визита, в котором был дан ответ",
             "format": "uuid"
           },
-          "answer1": {
-            "type": "string",
-            "description": "Ответ на вопрос/количество"
-          },
           "answer2": {
             "type": "string",
             "description": "Примечание/цена"
+          },
+          "answer1": {
+            "type": "string",
+            "description": "Ответ на вопрос/количество"
           }
         },
         "required": [
           "questionUUID",
           "visitUUID",
           "answer1"
+        ],
+        "x-tags": [
+          "Офис",
+          "Фронтенд"
         ]
       },
       "UserProfile": {
@@ -1274,11 +1241,11 @@
             "description": "Уникальный идентификатор пользователя в 1С"
           }
         },
-        "description": "Моделька профиля пользователей",
         "x-tags": [
           "Фронтенд",
           "Офис"
-        ]
+        ],
+        "description": "Моделька профиля пользователей"
       },
       "TypePrice": {
         "title": "TypePrice",
@@ -1289,6 +1256,44 @@
         "description": "Массив типов цен",
         "x-tags": [
           "1С"
+        ]
+      },
+      "Order": {
+        "title": "Объект заказа",
+        "type": "object",
+        "description": "Объект описания заказанного, рекомендованного к заказу, остаточного и отгруженного товара",
+        "x-tags": [
+          "1С",
+          "Офис",
+          "Фронтенд"
+        ],
+        "properties": {
+          "productItem": {
+            "type": "string",
+            "description": "Артикул товара"
+          },
+          "order": {
+            "type": "integer",
+            "description": "Заказанное количество"
+          },
+          "delivered": {
+            "description": "Отгруженное количество",
+            "type": "integer"
+          },
+          "recommend": {
+            "type": "integer",
+            "description": "Рекомендованный заказ"
+          },
+          "balance": {
+            "description": "Складской остаток",
+            "type": "integer"
+          },
+          "sales": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "productItem"
         ]
       }
     },
