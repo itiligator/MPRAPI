@@ -1162,6 +1162,9 @@
           "clientINN": {
             "type": "string",
             "description": "ИНН клиента. Генерируется приложением МПР или офиса и никогда не изменяется"
+          },
+          "paymentPlan": {
+            "type": "integer"
           }
         }
       },
