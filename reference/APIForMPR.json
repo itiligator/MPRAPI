@@ -552,107 +552,6 @@
         ]
       }
     },
-    "/visits/{UUID}": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "name": "UUID",
-          "in": "path",
-          "required": true,
-          "description": "UUID запрашиваемого визита"
-        }
-      ],
-      "put": {
-        "summary": "Запись данных визита",
-        "tags": [
-          "Фронтенд",
-          "1С"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "201": {
-            "description": "Created"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "403": {
-            "description": "Forbidden"
-          }
-        },
-        "operationId": "put-visit-UUID",
-        "description": "Точка для обновления данных визита со стороны фронтенда и для обновления статуса оформления ПКО и создания накладной со стороны 1С",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Visit"
-              }
-            }
-          },
-          "description": "Данные визита"
-        }
-      },
-      "get": {
-        "summary": "Получение данных визита",
-        "operationId": "get-visit-UUID",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Visit"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        },
-        "tags": [
-          "Фронтенд",
-          "1С",
-          "Офис"
-        ],
-        "description": "Возвращает данные запрошенного визита"
-      },
-      "delete": {
-        "summary": "Удаление визита",
-        "operationId": "delete-visit-UUID",
-        "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        },
-        "tags": [
-          "1С",
-          "Офис"
-        ],
-        "description": "Запрос на удаление визита"
-      }
-    },
     "/checklistsquestions/{UUID}": {
       "parameters": [
         {
@@ -863,6 +762,107 @@
           "1С"
         ]
       }
+    },
+    "/visits/{UUID}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": "UUID",
+          "in": "path",
+          "required": true,
+          "description": "UUID запрашиваемого визита"
+        }
+      ],
+      "put": {
+        "summary": "Запись данных визита",
+        "tags": [
+          "Фронтенд",
+          "1С"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "operationId": "put-visit-UUID",
+        "description": "Точка для обновления данных визита со стороны фронтенда и для обновления статуса оформления ПКО и создания накладной со стороны 1С",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Visit"
+              }
+            }
+          },
+          "description": "Данные визита"
+        }
+      },
+      "get": {
+        "summary": "Получение данных визита",
+        "operationId": "get-visit-UUID",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Visit"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "tags": [
+          "Фронтенд",
+          "1С",
+          "Офис"
+        ],
+        "description": "Возвращает данные запрошенного визита"
+      },
+      "delete": {
+        "summary": "Удаление визита",
+        "operationId": "delete-visit-UUID",
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "tags": [
+          "1С",
+          "Офис"
+        ],
+        "description": "Запрос на удаление визита"
+      }
     }
   },
   "components": {
@@ -1001,6 +1001,11 @@
         "title": "Товар",
         "type": "object",
         "description": "Товары пивоварни",
+        "x-tags": [
+          "1С",
+          "Офис",
+          "Фронтенд"
+        ],
         "properties": {
           "item": {
             "type": [
@@ -1022,11 +1027,6 @@
           "item",
           "name",
           "description"
-        ],
-        "x-tags": [
-          "1С",
-          "Офис",
-          "Фронтенд"
         ]
       },
       "Price": {
@@ -1047,21 +1047,89 @@
             "type": "string",
             "description": "Тип цены"
           },
-          "amount": {
-            "type": "string",
-            "description": "Цена в рублях"
-          },
           "dataBase": {
             "description": "Индикатор базы данных",
             "type": "boolean"
+          },
+          "amount": {
+            "type": "string",
+            "description": "Цена в рублях"
           }
         }
+      },
+      "Order": {
+        "title": "Объект заказа",
+        "type": "object",
+        "description": "Объект описания заказанного, рекомендованного к заказу, остаточного и отгруженного товара",
+        "x-tags": [
+          "1С",
+          "Офис",
+          "Фронтенд"
+        ],
+        "properties": {
+          "order": {
+            "type": "integer",
+            "description": "Заказанное количество продукта. Генерируется приложением МПР, изменяется приложением офиса"
+          },
+          "delivered": {
+            "description": "Количество поставленного продукт. По умолчанию установлено в 0, обновляется со стороны 1С",
+            "type": "integer"
+          },
+          "recommend": {
+            "type": "integer",
+            "description": "Рекомендованное к заказу количесво. Генерируется приложением МПР и никогда не изменяется"
+          },
+          "balance": {
+            "description": "Остаток продукта у клиента. Генерируется приложением МПР, изменяется приложением офиса",
+            "type": "integer"
+          },
+          "sales": {
+            "type": "integer",
+            "description": "Продажи продкукта. Генерируется приложением МПР, изменяется приложением офиса"
+          },
+          "productItem": {
+            "type": "string",
+            "description": "Артикул продукта. Генерируется приложением МПР, никогда не изменяется"
+          }
+        },
+        "required": [
+          "productItem"
+        ]
       },
       "Visit": {
         "title": "Визит",
         "type": "object",
         "description": "Данные по визитам",
         "x-examples": {
+          "Передаваемые приложением МПР данные визита в момент его начала": {
+            "clientINN": "245017014629",
+            "status": 1
+          },
+          "Передаваемые офисом (бэкендом) данные запланированного визита": {
+            "clientINN": "245017014629",
+            "status": 0,
+            "managerID": "3"
+          },
+          "Обновление со стороны 1С данных визита при создании накладной": {
+            "invoice": true,
+            "orders": [
+              {
+                "productItem": "5324",
+                "delivered": 40
+              },
+              {
+                "productItem": "1123",
+                "delivered": 18
+              },
+              {
+                "productItem": "a642",
+                "delivered": 15
+              }
+            ]
+          },
+          "Обновление со стороны 1С статуса создания ПКО": {
+            "processed": true
+          },
           "Передаваемые приложением МПР данные визита в момент его окончания": {
             "payment": 3461,
             "status": 2,
@@ -1082,35 +1150,6 @@
                 "recommend": 32
               }
             ]
-          },
-          "Обновление со стороны 1С статуса создания ПКО": {
-            "processed": true
-          },
-          "Обновление со стороны 1С данных визита при создании накладной": {
-            "invoice": true,
-            "orders": [
-              {
-                "productItem": "5324",
-                "delivered": 40
-              },
-              {
-                "productItem": "1123",
-                "delivered": 18
-              },
-              {
-                "productItem": "a642",
-                "delivered": 15
-              }
-            ]
-          },
-          "Передаваемые офисом (бэкендом) данные запланированного визита": {
-            "clientINN": "245017014629",
-            "status": 0,
-            "managerID": "3"
-          },
-          "Передаваемые приложением МПР данные визита в момент его начала": {
-            "clientINN": "245017014629",
-            "status": 1
           }
         },
         "x-tags": [
@@ -1132,20 +1171,28 @@
           "dataBase": {
             "type": "boolean"
           },
+          "clientINN": {
+            "type": "string",
+            "description": "ИНН клиента. Генерируется приложением МПР или офиса и никогда не изменяется"
+          },
           "payment": {
             "type": "integer",
             "description": "Сумма денег, принятых в счет оплаты. Генерируется приложением МПР, обновляется приложением офиса"
           },
           "orders": {
             "type": "array",
-            "description": "Массив данных о заказанных продуктах, остатке, продажах",
             "items": {
               "$ref": "#/components/schemas/Order"
-            }
+            },
+            "description": "Массив данных о заказанных продуктах, остатке, продажах"
           },
           "processed": {
             "type": "boolean",
             "description": "Индикатор создания ПКО. По умолчанию установлен в false, устанавливается в true со стороны 1С при создании ПКО"
+          },
+          "invoice": {
+            "type": "boolean",
+            "description": "Индикатор создания накладной. По умолчанию установлен в false, устанавливается в true со стороны 1С при создании накладной"
           },
           "status": {
             "type": "integer",
@@ -1154,14 +1201,6 @@
           "managerID": {
             "type": "string",
             "description": "ID менеджера, который совершил (совершает) визит. Генерируется приложением МПР или офиса, никогда не изменяется"
-          },
-          "invoice": {
-            "type": "boolean",
-            "description": "Индикатор создания накладной. По умолчанию установлен в false, устанавливается в true со стороны 1С при создании накладной"
-          },
-          "clientINN": {
-            "type": "string",
-            "description": "ИНН клиента. Генерируется приложением МПР или офиса и никогда не изменяется"
           },
           "paymentPlan": {
             "type": "integer"
@@ -1172,6 +1211,10 @@
         "title": "Shop",
         "type": "object",
         "description": "Данные магазина",
+        "x-tags": [
+          "Офис",
+          "Фронтенд"
+        ],
         "properties": {
           "UUID": {
             "type": "string",
@@ -1193,16 +1236,16 @@
             "type": "boolean",
             "description": "Дейтсвует/не действует"
           }
-        },
-        "x-tags": [
-          "Офис",
-          "Фронтенд"
-        ]
+        }
       },
       "ChecklistQuestion": {
         "title": "Вопрос из чеклиста",
         "type": "object",
         "description": "Данные о вопросе и формате ответа из чеклиста",
+        "x-tags": [
+          "Офис",
+          "Фронтенд"
+        ],
         "properties": {
           "UUID": {
             "type": "string",
@@ -1213,10 +1256,6 @@
             "type": "string",
             "description": "текст вопроса"
           },
-          "active": {
-            "type": "boolean",
-            "description": "Задавать ли вопрос"
-          },
           "clientType": {
             "type": "string",
             "description": "Тип чеклиста",
@@ -1224,22 +1263,26 @@
               "store",
               "client"
             ]
+          },
+          "active": {
+            "type": "boolean",
+            "description": "Задавать ли вопрос"
           }
         },
         "required": [
           "UUID",
           "text",
           "clientType"
-        ],
-        "x-tags": [
-          "Офис",
-          "Фронтенд"
         ]
       },
       "ChecklistAnswer": {
         "title": "Ответ на вопрос из чеклиста",
         "type": "object",
         "description": "Ответ на поставленный вопрос, данный в ходе визита",
+        "x-tags": [
+          "Офис",
+          "Фронтенд"
+        ],
         "properties": {
           "questionUUID": {
             "type": "string",
@@ -1251,23 +1294,24 @@
             "description": "UUID визита, в котором был дан ответ",
             "format": "uuid"
           },
+          "answer1": {
+            "type": "string",
+            "description": "Ответ на вопрос/количество"
+          },
           "answer2": {
             "type": "string",
             "description": "Примечание/цена"
           },
-          "answer1": {
+          "UUID": {
             "type": "string",
-            "description": "Ответ на вопрос/количество"
+            "description": "UUID ответа",
+            "format": "uuid"
           }
         },
         "required": [
           "questionUUID",
           "visitUUID",
           "answer1"
-        ],
-        "x-tags": [
-          "Офис",
-          "Фронтенд"
         ]
       },
       "UserProfile": {
@@ -1287,11 +1331,11 @@
             "description": "Уникальный идентификатор пользователя в 1С"
           }
         },
+        "description": "Моделька профиля пользователей",
         "x-tags": [
           "Фронтенд",
           "Офис"
-        ],
-        "description": "Моделька профиля пользователей"
+        ]
       },
       "TypePrice": {
         "title": "TypePrice",
@@ -1302,45 +1346,6 @@
         "description": "Массив типов цен",
         "x-tags": [
           "1С"
-        ]
-      },
-      "Order": {
-        "title": "Объект заказа",
-        "type": "object",
-        "description": "Объект описания заказанного, рекомендованного к заказу, остаточного и отгруженного товара",
-        "x-tags": [
-          "1С",
-          "Офис",
-          "Фронтенд"
-        ],
-        "properties": {
-          "productItem": {
-            "type": "string",
-            "description": "Артикул продукта. Генерируется приложением МПР, никогда не изменяется"
-          },
-          "order": {
-            "type": "integer",
-            "description": "Заказанное количество продукта. Генерируется приложением МПР, изменяется приложением офиса"
-          },
-          "delivered": {
-            "description": "Количество поставленного продукт. По умолчанию установлено в 0, обновляется со стороны 1С",
-            "type": "integer"
-          },
-          "recommend": {
-            "type": "integer",
-            "description": "Рекомендованное к заказу количесво. Генерируется приложением МПР и никогда не изменяется"
-          },
-          "balance": {
-            "description": "Остаток продукта у клиента. Генерируется приложением МПР, изменяется приложением офиса",
-            "type": "integer"
-          },
-          "sales": {
-            "type": "integer",
-            "description": "Продажи продкукта. Генерируется приложением МПР, изменяется приложением офиса"
-          }
-        },
-        "required": [
-          "productItem"
         ]
       },
       "VisitArray": {
