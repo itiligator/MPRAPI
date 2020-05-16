@@ -1276,6 +1276,10 @@
           "active": {
             "type": "boolean",
             "description": "Задавать ли вопрос"
+          },
+          "section": {
+            "type": "string",
+            "description": "Раздел чеклиста"
           }
         },
         "required": [
