@@ -497,8 +497,8 @@
               "type": "string"
             },
             "in": "query",
-            "name": "checklisttype",
-            "description": "тип чеклиста"
+            "name": "clientType",
+            "description": "тип клиента, для которого задан вопрос"
           },
           {
             "schema": {
@@ -532,6 +532,15 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
           }
         },
         "description": "Ожидает массив ответов на вопросы чеклиста",
