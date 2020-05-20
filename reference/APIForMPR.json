@@ -1217,6 +1217,10 @@
           "id": {
             "type": "integer",
             "description": "Человекочитаемый ID"
+          },
+          "author": {
+            "type": "string",
+            "description": "ID автора визита"
           }
         }
       },
