@@ -1190,10 +1190,10 @@
           },
           "orders": {
             "type": "array",
+            "description": "Массив данных о заказанных продуктах, остатке, продажах",
             "items": {
               "$ref": "#/components/schemas/Order"
-            },
-            "description": "Массив данных о заказанных продуктах, остатке, продажах"
+            }
           },
           "processed": {
             "type": "boolean",
@@ -1213,6 +1213,10 @@
           },
           "paymentPlan": {
             "type": "integer"
+          },
+          "id": {
+            "type": "integer",
+            "description": "Человекочитаемый ID"
           }
         }
       },
