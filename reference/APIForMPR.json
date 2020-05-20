@@ -1316,7 +1316,10 @@
             "format": "uuid"
           },
           "answer1": {
-            "type": "string",
+            "type": [
+              "string",
+              "boolean"
+            ],
             "description": "Ответ на вопрос/количество"
           },
           "answer2": {
