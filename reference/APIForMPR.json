@@ -352,7 +352,7 @@
           }
         },
         "operationId": "get-visit",
-        "description": "Возвращает данные запрошенных визитов",
+        "description": "Возвращает данные запрошенных визитов начиная с самых новых",
         "parameters": [
           {
             "schema": {
@@ -401,6 +401,22 @@
             "in": "query",
             "name": "clientINN",
             "description": "ИНН клиента"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "author",
+            "description": "ID автора визита"
+          },
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "in": "query",
+            "name": "limit",
+            "description": "Количество записей"
           }
         ]
       },
