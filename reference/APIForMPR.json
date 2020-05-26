@@ -888,6 +888,26 @@
         ],
         "description": "Запрос на удаление визита"
       }
+    },
+    "/users/me": {
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserProfile"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-users-me",
+        "description": "Вовзращает данные пользователя"
+      }
     }
   },
   "components": {
