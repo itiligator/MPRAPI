@@ -392,7 +392,7 @@
             },
             "in": "query",
             "name": "date",
-            "description": "Дата в формате YYYY-MM-DD"
+            "description": "Все визиты до даты включительно (в формате YYYY-MM-DD)"
           },
           {
             "schema": {
@@ -1222,10 +1222,14 @@
           },
           "payment": {
             "description": "Сумма денег, принятых в счет оплаты. Генерируется приложением МПР, обновляется приложением офиса",
-              "anyOf": [
-                {"type": "number"},
-                {"type": "null"}
-              ]
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
           },
           "orders": {
             "type": "array",
