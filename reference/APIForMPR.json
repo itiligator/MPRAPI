@@ -1020,12 +1020,7 @@
         },
         "required": [
           "name",
-          "clientType",
-          "priceType",
-          "delay",
-          "authorizedManagersID",
-          "status",
-          "dataBase"
+          "inn"
         ]
       },
       "TokenResponse": {
