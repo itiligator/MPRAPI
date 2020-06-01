@@ -171,7 +171,46 @@
           }
         ]
       },
-      "parameters": []
+      "parameters": [],
+      "put": {
+        "summary": "",
+        "operationId": "put-clients",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "description": "Ожидает единичную запись или массив записей клиентов. Создает новые или обновляет имеющиеся записи клиентов ",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "anyOf": [
+                  {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/Client"
+                    }
+                  },
+                  {
+                    "$ref": "#/components/schemas/Client"
+                  }
+                ]
+              }
+            }
+          },
+          "description": "Массив или единичная запись клиента"
+        }
+      }
     },
     "/products": {
       "get": {
@@ -995,7 +1034,8 @@
             "type": "string"
           },
           "manager": {
-            "type": "string"
+            "type": "string",
+            "description": "ID основного менеджера"
           },
           "longitude": {
             "type": "string"
