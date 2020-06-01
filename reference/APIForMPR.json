@@ -74,34 +74,6 @@
       }
     },
     "/clients": {
-      "post": {
-        "summary": "Обновление перечня клиентов",
-        "tags": [
-          "1С"
-        ],
-        "responses": {
-          "201": {
-            "description": "Created"
-          },
-          "400": {
-            "description": "Bad Request"
-          }
-        },
-        "operationId": "post-clients",
-        "description": "Обновление (на данный момент замена целиком, за исключением магазинов) перечня клиентов от 1С. Ожидает массив объектов описания клиентов",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/Client"
-                }
-              }
-            }
-          }
-        }
-      },
       "get": {
         "summary": "Получение клиентов и магазинов",
         "tags": [
@@ -189,26 +161,19 @@
             "description": "Forbidden"
           }
         },
-        "description": "Ожидает единичную запись или массив записей клиентов. Создает новые или обновляет имеющиеся записи клиентов ",
+        "description": "Ожидает массив записей клиентов. Создает новые или обновляет имеющиеся записи клиентов",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "anyOf": [
-                  {
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/Client"
-                    }
-                  },
-                  {
-                    "$ref": "#/components/schemas/Client"
-                  }
-                ]
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Client"
+                }
               }
             }
           },
-          "description": "Массив или единичная запись клиента"
+          "description": "Массив записей клиента"
         }
       }
     },
