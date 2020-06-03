@@ -972,8 +972,7 @@
             "description": "Отсрочка по договору",
             "format": "int32",
             "example": 0,
-            "minimum": 0,
-            "maximum": 45
+            "minimum": 0
           },
           "limit": {
             "type": "integer",
@@ -981,8 +980,7 @@
             "description": "Лимит",
             "format": "int64",
             "example": 0,
-            "minimum": 0,
-            "maximum": 100000
+            "minimum": 0
           },
           "authorizedManagersID": {
             "type": "array",
@@ -1019,7 +1017,6 @@
           }
         },
         "required": [
-          "name",
           "inn"
         ]
       },
