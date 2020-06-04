@@ -145,7 +145,7 @@
       },
       "parameters": [],
       "put": {
-        "summary": "",
+        "summary": "Запись данных о клиентах и магазинах",
         "operationId": "put-clients",
         "responses": {
           "200": {
@@ -174,7 +174,11 @@
             }
           },
           "description": "Массив записей клиента"
-        }
+        },
+        "tags": [
+          "Офис",
+          "1С"
+        ]
       }
     },
     "/products": {
@@ -912,6 +916,58 @@
         "operationId": "get-users-me",
         "description": "Вовзращает данные пользователя"
       }
+    },
+    "/photos/{UUID}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": "UUID",
+          "in": "path",
+          "required": true,
+          "description": "UUID визита"
+        }
+      ],
+      "get": {
+        "summary": "Запрос фотографий с визита",
+        "tags": [
+          "Офис"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "operationId": "get-photos-UUID",
+        "description": "TODO: Придумать что возвращать"
+      },
+      "post": {
+        "summary": "Отправка фотографий в ходе визита",
+        "operationId": "post-photos-UUID",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        },
+        "tags": [
+          "Фронтенд"
+        ],
+        "description": "Ожидает фотографию с визита",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/photo"
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -1476,6 +1532,20 @@
         "description": "",
         "x-tags": [
           "1С",
+          "Офис",
+          "Фронтенд"
+        ]
+      },
+      "photo": {
+        "title": "Фотография",
+        "type": "object",
+        "properties": {
+          "image": {
+            "description": "Фотография"
+          }
+        },
+        "description": "Модель фото",
+        "x-tags": [
           "Офис",
           "Фронтенд"
         ]
