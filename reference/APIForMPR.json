@@ -240,38 +240,14 @@
               }
             }
           }
-        }
+        },
+        "tags": [
+          "1С",
+          "Офис"
+        ]
       }
     },
     "/prices": {
-      "post": {
-        "summary": "Обновление перечня цен",
-        "tags": [
-          "1С"
-        ],
-        "responses": {
-          "201": {
-            "description": "Created"
-          },
-          "400": {
-            "description": "Bad Request"
-          }
-        },
-        "operationId": "post-price",
-        "description": "Обновление (на данный момент замена целиком всех) перечня цен от 1С. Ожидает массив объектов описания цен ",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/Price"
-                }
-              }
-            }
-          }
-        }
-      },
       "get": {
         "summary": "Получение цен",
         "tags": [
@@ -328,7 +304,43 @@
           }
         ]
       },
-      "parameters": []
+      "parameters": [],
+      "put": {
+        "summary": "Обновление перечня цен",
+        "operationId": "put-prices",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "description": "Обновление перечня цен. Ожидает массив объектов описания цен ",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Price"
+                }
+              }
+            }
+          },
+          "description": ""
+        },
+        "tags": [
+          "Офис",
+          "1С"
+        ]
+      }
     },
     "/visits": {
       "get": {
