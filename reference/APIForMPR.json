@@ -235,7 +235,7 @@
               "schema": {
                 "type": "array",
                 "items": {
-                  "$ref": "#/components/schemas/TypePrice"
+                  "$ref": "#/components/schemas/Product"
                 }
               }
             }
@@ -1013,12 +1013,7 @@
             "type": "string",
             "description": "Развернутое описание товара"
           }
-        },
-        "required": [
-          "item",
-          "name",
-          "description"
-        ]
+        }
       },
       "Price": {
         "title": "Цена",
@@ -1315,17 +1310,6 @@
         "x-tags": [
           "Фронтенд",
           "Офис"
-        ]
-      },
-      "TypePrice": {
-        "title": "TypePrice",
-        "type": "array",
-        "items": {
-          "type": "string"
-        },
-        "description": "Массив типов цен",
-        "x-tags": [
-          "1С"
         ]
       },
       "VisitArray": {
