@@ -663,100 +663,6 @@
         ]
       }
     },
-    "/shops/{UUID}": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "name": "UUID",
-          "in": "path",
-          "required": true
-        }
-      ],
-      "get": {
-        "summary": "Запрос данных магазина",
-        "tags": [
-          "Офис",
-          "Фронтенд"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Shop"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        },
-        "operationId": "get-shops-UUID",
-        "description": "Возвращает объект описания магазина"
-      },
-      "delete": {
-        "summary": "Удаление магазина",
-        "operationId": "delete-shops-UUID",
-        "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        },
-        "description": "Удаляет данные магазина с запрошенным UUID ",
-        "tags": [
-          "Офис"
-        ]
-      },
-      "put": {
-        "summary": "Создание или обновления данных магазина",
-        "operationId": "put-shops-UUID",
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "201": {
-            "description": "Created"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "403": {
-            "description": "Forbidden"
-          }
-        },
-        "description": "Запрос на добавление или обновление данных магазина",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Shop"
-              }
-            }
-          },
-          "description": "Данные магазина"
-        },
-        "tags": [
-          "Офис"
-        ]
-      }
-    },
     "/users": {
       "get": {
         "summary": "Получение массива пользователей",
@@ -1304,37 +1210,6 @@
           "id": {
             "type": "integer",
             "description": "Человекочитаемый ID"
-          }
-        }
-      },
-      "Shop": {
-        "title": "Shop",
-        "type": "object",
-        "description": "Данные магазина",
-        "x-tags": [
-          "Офис",
-          "Фронтенд"
-        ],
-        "properties": {
-          "UUID": {
-            "type": "string",
-            "description": "Уникальный идентификатор магазина",
-            "format": "uuid"
-          },
-          "name": {
-            "type": "string",
-            "description": "Наименование магазина"
-          },
-          "authorizedManagersID": {
-            "type": "array",
-            "description": "Массив идентификаторов допущенных менеджеров ",
-            "items": {
-              "type": "string"
-            }
-          },
-          "status": {
-            "type": "boolean",
-            "description": "Дейтсвует/не действует"
           }
         }
       },
