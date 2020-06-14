@@ -11,11 +11,11 @@
   },
   "servers": [
     {
-      "url": "http://46.174.253.173:8000/api",
+      "url": "https://pr2012.ru",
       "description": "Продакшн"
     },
     {
-      "url": "http://46.174.253.173:8000/sandbox",
+      "url": "https://rhzc.ru",
       "description": "Песочница"
     }
   ],
