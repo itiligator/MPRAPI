@@ -210,26 +210,14 @@
         "description": "Возвращает массив объектов товаров",
         "parameters": []
       },
-      "post": {
+      "parameters": [],
+      "put": {
         "summary": "Обновление перечня товаров",
-        "operationId": "post-products",
-        "description": "Обновление (на данный момент замена целиком) перечня товаров от 1С. Ожидает массив объектов описания товаров",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/Product"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "1С"
-        ],
+        "operationId": "put-products",
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "201": {
             "description": "Created"
           },
@@ -239,9 +227,21 @@
           "403": {
             "description": "Forbidden"
           }
+        },
+        "description": "Обновление перечня товаров. Ожидает массив объектов описания товаров",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/TypePrice"
+                }
+              }
+            }
+          }
         }
-      },
-      "parameters": []
+      }
     },
     "/prices": {
       "post": {
@@ -771,31 +771,6 @@
         "description": "Возвращает массив данных пользователей"
       }
     },
-    "/typeprice": {
-      "post": {
-        "summary": "Запись массива типов цен",
-        "operationId": "post-typeprice",
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        },
-        "description": "Записть массива типов цен",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/TypePrice"
-              }
-            }
-          },
-          "description": "Массив типов цен"
-        },
-        "tags": [
-          "1С"
-        ]
-      }
-    },
     "/visits/{UUID}": {
       "parameters": [
         {
@@ -897,26 +872,6 @@
         "description": "Запрос на удаление визита"
       }
     },
-    "/users/me": {
-      "get": {
-        "summary": "Your GET endpoint",
-        "tags": [],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/UserProfile"
-                }
-              }
-            }
-          }
-        },
-        "operationId": "get-users-me",
-        "description": "Вовзращает данные пользователя"
-      }
-    },
     "/photos/{UUID}": {
       "parameters": [
         {
@@ -967,6 +922,26 @@
             }
           }
         }
+      }
+    },
+    "/users/me": {
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserProfile"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-users-me",
+        "description": "Вовзращает данные пользователя"
       }
     }
   },
@@ -1286,10 +1261,10 @@
           },
           "orders": {
             "type": "array",
-            "description": "Массив данных о заказанных продуктах, остатке, продажах",
             "items": {
               "$ref": "#/components/schemas/Order"
-            }
+            },
+            "description": "Массив данных о заказанных продуктах, остатке, продажах"
           },
           "processed": {
             "type": "boolean",
@@ -1310,13 +1285,13 @@
           "paymentPlan": {
             "type": "integer"
           },
-          "id": {
-            "type": "integer",
-            "description": "Человекочитаемый ID"
-          },
           "author": {
             "type": "string",
             "description": "ID автора визита"
+          },
+          "id": {
+            "type": "integer",
+            "description": "Человекочитаемый ID"
           }
         }
       },
