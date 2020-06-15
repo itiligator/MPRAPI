@@ -861,6 +861,50 @@
         "operationId": "get-users-me",
         "description": "Вовзращает данные пользователя"
       }
+    },
+    "/visit/id/{ID}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "ID",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Получение данных визита",
+        "tags": [
+          "1С"
+        ],
+        "responses": {
+          "308": {
+            "description": "Permanent Redirect (experiemental)"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        },
+        "operationId": "get-visit-id-ID",
+        "description": "Редирект к /visit/{UUID}"
+      },
+      "put": {
+        "summary": "Запись данных визита",
+        "operationId": "put-visit-id-ID",
+        "responses": {
+          "308": {
+            "description": "Permanent Redirect (experiemental)"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        },
+        "description": "Редирект к /visit/{UUID}",
+        "tags": [
+          "1С"
+        ]
+      }
     }
   },
   "components": {
