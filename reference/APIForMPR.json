@@ -380,7 +380,7 @@
             },
             "in": "query",
             "name": "processed",
-            "description": "Создан ПКО"
+            "description": "Имеется запись о накладной"
           },
           {
             "schema": {
@@ -388,7 +388,7 @@
             },
             "in": "query",
             "name": "invoice",
-            "description": "Создана накладная на отгрузку"
+            "description": "Имеется запись о ПКО"
           },
           {
             "schema": {
