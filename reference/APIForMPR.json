@@ -862,7 +862,7 @@
         "description": "Вовзращает данные пользователя"
       }
     },
-    "/visit/id/{ID}": {
+    "/visits/id/{ID}": {
       "parameters": [
         {
           "schema": {
