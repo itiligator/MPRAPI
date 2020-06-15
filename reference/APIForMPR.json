@@ -1006,7 +1006,8 @@
           },
           "dataBase": {
             "type": "boolean",
-            "default": "0"
+            "default": "0",
+            "description": "0 - тест, 1 - ПБК"
           }
         },
         "required": [
@@ -1078,7 +1079,7 @@
             "description": "Тип цены"
           },
           "dataBase": {
-            "description": "Индикатор базы данных",
+            "description": "0 - тест, 1 - ПБК",
             "type": "boolean"
           },
           "amount": {
@@ -1199,7 +1200,8 @@
             "description": "Дата совершения визита. Генерируется приложением МПР и никогда не изменяется"
           },
           "dataBase": {
-            "type": "boolean"
+            "type": "boolean",
+            "description": "0 - тест, 1 - ПБК"
           },
           "clientINN": {
             "type": "string",
