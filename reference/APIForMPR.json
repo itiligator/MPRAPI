@@ -1142,7 +1142,7 @@
             "managerID": "3"
           },
           "Обновление со стороны 1С данных визита при создании накладной": {
-            "invoice": true,
+            "invoice": "#222",
             "orders": [
               {
                 "productItem": "5324",
@@ -1159,7 +1159,7 @@
             ]
           },
           "Обновление со стороны 1С статуса создания ПКО": {
-            "processed": true
+            "processed": "#654534"
           },
           "Передаваемые приложением МПР данные визита в момент его окончания": {
             "payment": 3461,
@@ -1220,11 +1220,11 @@
           },
           "processed": {
             "type": "string",
-            "description": "Индикатор создания ПКО. По умолчанию установлен в false, устанавливается в true со стороны 1С при создании ПКО"
+            "description": "Номер накладной. Устанавливается в true со стороны 1С при создании накладной"
           },
           "invoice": {
             "type": "string",
-            "description": "Индикатор создания накладной. По умолчанию установлен в false, устанавливается в true со стороны 1С при создании накладной"
+            "description": "Номер ПКО. Устанавливается в true со стороны 1С при создании ПКО"
           },
           "status": {
             "type": "integer",
@@ -1235,7 +1235,8 @@
             "description": "ID менеджера, который совершил (совершает) визит. Генерируется приложением МПР или офиса, никогда не изменяется"
           },
           "paymentPlan": {
-            "type": "integer"
+            "type": "integer",
+            "description": "Запланированная оплата"
           },
           "author": {
             "type": "string",
@@ -1373,8 +1374,8 @@
               "managerID": "6",
               "payment": 3461,
               "status": 2,
-              "invoice": false,
-              "processed": false,
+              "invoice": "#4242",
+              "processed": "#8567",
               "dataBase": false,
               "orders": [
                 {
@@ -1401,8 +1402,8 @@
               "managerID": "8",
               "payment": 8965,
               "status": 2,
-              "invoice": false,
-              "processed": false,
+              "invoice": "#9534",
+              "processed": "#8756",
               "dataBase": false,
               "orders": [
                 {
