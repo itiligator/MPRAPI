@@ -11,11 +11,11 @@
   },
   "servers": [
     {
-      "url": "https://pr2012.ru",
+      "url": "https://pr2012.ru/api",
       "description": "Продакшн"
     },
     {
-      "url": "https://rhzc.ru",
+      "url": "https://rhzc.ru/api",
       "description": "Песочница"
     }
   ],
