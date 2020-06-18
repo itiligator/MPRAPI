@@ -1006,8 +1006,7 @@
           },
           "dataBase": {
             "type": "boolean",
-            "default": "0",
-            "description": "0 - тест, 1 - ПБК"
+            "description": "false - тест, true - ПБК"
           },
           "address": {
             "type": "string",
