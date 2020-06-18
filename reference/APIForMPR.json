@@ -208,7 +208,16 @@
         },
         "operationId": "get-products",
         "description": "Возвращает массив объектов товаров",
-        "parameters": []
+        "parameters": [
+          {
+            "schema": {
+              "type": "boolean"
+            },
+            "in": "query",
+            "name": "active",
+            "description": "Признак активности товара"
+          }
+        ]
       },
       "parameters": [],
       "put": {
@@ -1060,6 +1069,10 @@
           "description": {
             "type": "string",
             "description": "Развернутое описание товара"
+          },
+          "active": {
+            "type": "boolean",
+            "description": "Признак активности"
           }
         }
       },
