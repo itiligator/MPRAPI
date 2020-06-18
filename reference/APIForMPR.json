@@ -1008,6 +1008,10 @@
             "type": "boolean",
             "default": "0",
             "description": "0 - тест, 1 - ПБК"
+          },
+          "address": {
+            "type": "string",
+            "description": "Адрес клиента"
           }
         },
         "required": [
