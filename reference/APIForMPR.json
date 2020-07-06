@@ -473,7 +473,17 @@
           }
         },
         "operationId": "get-checklistsquestions",
-        "description": "Возвращает массив всех вопросов для всех чеклистов"
+        "description": "Возвращает массив всех вопросов для всех чеклистов",
+        "parameters": [
+          {
+            "schema": {
+              "type": "boolean"
+            },
+            "in": "query",
+            "name": "active",
+            "description": "Активность вопроса"
+          }
+        ]
       },
       "put": {
         "summary": "Создание или уточнение вопроса",
