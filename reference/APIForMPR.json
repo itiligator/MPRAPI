@@ -924,6 +924,21 @@
           "1С"
         ]
       }
+    },
+    "/resetvisits": {
+      "get": {
+        "summary": "Отладочная точка создания визитов",
+        "tags": [
+          "1С"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "operationId": "get-resetvisits",
+        "description": "Генерирует в базе записи оконченных и запланированных визитов для обращающегося МПР"
+      }
     }
   },
   "components": {
