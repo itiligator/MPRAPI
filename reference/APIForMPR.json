@@ -446,6 +446,14 @@
             "in": "query",
             "name": "limit",
             "description": "Количество записей"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "dataBase",
+            "description": "false - Тест, true - ПБК"
           }
         ]
       },
